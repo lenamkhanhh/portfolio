@@ -163,19 +163,6 @@ export const currentCompetitionEvidence = {
 
 export const preUniversityArchivePeriod = "2022–2025";
 
-export const preUniversityPhotoEvidence = [
-  {
-    src: "/assets/achievement/delegation-field-note-graded.webp",
-    label: "Delegation field note",
-    description: "Student competition delegation · 2024",
-  },
-  {
-    src: "/assets/achievement/april-30-olympiad-graded.webp",
-    label: "28th Traditional April 30 Olympiad · 2024",
-    description: "Informatics delegation · Vũng Tàu",
-  },
-] as const;
-
 export const work: WorkItem[] = [
   {
     title: "ICPC Solo Training System",

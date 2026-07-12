@@ -286,22 +286,7 @@ svg { display: block; }
   line-height: 1.62;
 }
 .foundation-archive { margin-top: 58px; }
-.foundation-photo-diptych {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 2px;
-  overflow: hidden;
-  background: var(--rule-strong);
-}
-.foundation-photo-diptych figure { display: grid; grid-template-rows: auto auto; margin: 0; overflow: hidden; background: #d8ddde; }
-.foundation-photo-diptych img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; transition: transform 600ms cubic-bezier(.22, 1, .36, 1); }
-.foundation-photo-diptych figure:hover img { transform: scale(1.018); }
-.foundation-photo-diptych figure:first-child img { object-position: 50% 67%; }
-.foundation-photo-diptych figure:last-child img { object-position: 50% 52%; }
-.foundation-photo-diptych figcaption { display: flex; align-items: baseline; gap: 14px; min-height: 54px; padding: 14px 18px; color: var(--ink); background: rgba(251, 252, 248, .96); }
-.foundation-photo-diptych figcaption span { display: block; font: 10px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
-.foundation-photo-diptych figcaption p { margin: 0; color: var(--muted); font-size: 12px; }
-.foundation-record-ledger { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px; margin-top: 2px; background: var(--rule-strong); }
+.foundation-record-ledger { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px; background: var(--rule-strong); }
 .foundation-progression,
 .foundation-feature,
 .foundation-proof-strip {
@@ -697,10 +682,7 @@ svg { display: block; }
   .foundation-heading h2 { font-size: clamp(38px, 12vw, 56px); }
   .foundation-indexline { margin-bottom: 18px; font-size: 10px; }
   .foundation-archive { margin-top: 38px; }
-  .foundation-photo-diptych { grid-template-columns: 1fr; gap: 2px; }
-  .foundation-photo-diptych figure { grid-template-rows: auto auto; min-height: 0; }
-  .foundation-photo-diptych figcaption { align-items: flex-start; flex-direction: column; gap: 5px; min-height: 0; padding: 12px 14px; }
-  .foundation-record-ledger { grid-template-columns: 1fr; margin-top: 2px; }
+  .foundation-record-ledger { grid-template-columns: 1fr; }
   .foundation-progression, .foundation-feature { padding: 22px 18px; }
   .foundation-card-kicker { margin-top: 38px; }
   .foundation-years { grid-template-columns: 1fr; margin-top: 34px; }

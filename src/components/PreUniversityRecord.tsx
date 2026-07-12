@@ -1,7 +1,6 @@
 import {
   preUniversityAchievements,
   preUniversityArchivePeriod,
-  preUniversityPhotoEvidence,
 } from "../content";
 
 export function PreUniversityRecord() {
@@ -23,35 +22,6 @@ export function PreUniversityRecord() {
         </div>
 
         <div className="foundation-archive">
-          <div className="foundation-photo-diptych" aria-label="Competition archive photographs">
-            <figure>
-              <img
-                src={preUniversityPhotoEvidence[0].src}
-                alt="Student competition delegation standing at the entrance of a specialist high school"
-                width="1800"
-                height="1350"
-                decoding="async"
-              />
-              <figcaption>
-                <span>{preUniversityPhotoEvidence[0].label}</span>
-                <p>{preUniversityPhotoEvidence[0].description}</p>
-              </figcaption>
-            </figure>
-            <figure>
-              <img
-                src={preUniversityPhotoEvidence[1].src}
-                alt="Student Informatics delegation at the 28th Traditional April 30 Olympiad in Vũng Tàu"
-                width="1800"
-                height="1350"
-                decoding="async"
-              />
-              <figcaption>
-                <span>{preUniversityPhotoEvidence[1].label}</span>
-                <p>{preUniversityPhotoEvidence[1].description}</p>
-              </figcaption>
-            </figure>
-          </div>
-
           <div className="foundation-record-ledger">
             <article className="foundation-progression">
               <div className="foundation-card-topline">
