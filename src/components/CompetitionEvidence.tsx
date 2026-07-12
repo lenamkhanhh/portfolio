@@ -1,5 +1,7 @@
 import { ArrowUpRight } from "@phosphor-icons/react";
+import { motion, useReducedMotion } from "motion/react";
 import { currentCompetitionEvidence } from "../content";
+import { photoReveal, sectionReveal, sectionRevealGroup } from "../motion";
 
 const supportingImages = [
   {
@@ -17,18 +19,28 @@ const supportingImages = [
 ] as const;
 
 export function CompetitionEvidence() {
+  const reduce = useReducedMotion();
+
   return (
-    <section className="competition-section" id="competition" aria-labelledby="competition-title">
-      <div className="section-label competition-section-label">
+    <motion.section
+      className="competition-section"
+      id="competition"
+      aria-labelledby="competition-title"
+      variants={reduce ? undefined : sectionRevealGroup}
+      initial={reduce ? false : "hidden"}
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.12 }}
+    >
+      <motion.div variants={reduce ? undefined : sectionReveal} className="section-label competition-section-label">
         <span>03</span>
         <div>
           <p>University competition record</p>
           <time>2026</time>
         </div>
-      </div>
+      </motion.div>
 
-      <div className="competition-story">
-        <div className="competition-copy">
+      <motion.div variants={reduce ? undefined : sectionRevealGroup} className="competition-story">
+        <motion.div variants={reduce ? undefined : sectionReveal} className="competition-copy">
           <p className="competition-kicker">University competition record</p>
           <h2 id="competition-title">HCMUS Coding Challenge <span>2026</span></h2>
           <p className="competition-result">Champion.</p>
@@ -51,9 +63,9 @@ export function CompetitionEvidence() {
               <dd>Algorithms · problem solving</dd>
             </div>
           </dl>
-        </div>
+        </motion.div>
 
-        <figure className="competition-hero-figure">
+        <motion.figure variants={reduce ? undefined : photoReveal} className="competition-hero-figure">
           <div className="competition-image-frame">
             <img
               className="competition-photo competition-photo-champion"
@@ -69,11 +81,11 @@ export function CompetitionEvidence() {
             <span>Field note / HCMUS</span>
             <p>The award, participant, and university context remain visible in one frame.</p>
           </figcaption>
-        </figure>
+        </motion.figure>
 
         <div className="competition-supporting" aria-label="Competition photographs">
           {supportingImages.map((image, index) => (
-            <figure key={image.src}>
+            <motion.figure variants={reduce ? undefined : photoReveal} key={image.src}>
               <div className="competition-image-frame">
                 <img
                   className={image.className}
@@ -84,11 +96,11 @@ export function CompetitionEvidence() {
                 <span className="photo-index" aria-hidden="true">EVIDENCE 0{index + 2}</span>
               </div>
               <figcaption>{image.label}</figcaption>
-            </figure>
+            </motion.figure>
           ))}
         </div>
 
-        <article className="competition-current-proof">
+        <motion.article variants={reduce ? undefined : photoReveal} className="competition-current-proof">
           <img className="ai-challenge-cover" src={currentCompetitionEvidence.coverSrc} alt="GDGoC AI Challenge 2026 cover artwork" />
           <div className="ai-challenge-overlay">
             <p>Additional university record · 2026</p>
@@ -100,8 +112,8 @@ export function CompetitionEvidence() {
               <ArrowUpRight aria-hidden="true" />
             </a>
           </div>
-        </article>
-      </div>
-    </section>
+        </motion.article>
+      </motion.div>
+    </motion.section>
   );
 }

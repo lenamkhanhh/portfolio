@@ -33,6 +33,13 @@ export function PortfolioPage() {
       </header>
 
       <section className="hero" id="top">
+        <motion.span
+          aria-hidden="true"
+          className="hero-spectral-glint"
+          initial={reduce ? false : { opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: reduce ? 0 : 0.9, ease: [0.16, 1, 0.3, 1] }}
+        />
         <motion.div
           className="hero-copy"
           variants={reduce ? undefined : heroGroup}

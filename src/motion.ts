@@ -28,6 +28,34 @@ export const revealItem = {
   },
 };
 
+export const sectionRevealGroup = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.06,
+      delayChildren: 0.03,
+    },
+  },
+};
+
+export const sectionReveal = {
+  hidden: { opacity: 0, y: 12 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.46, ease: easeOut },
+  },
+};
+
+export const photoReveal = {
+  hidden: { opacity: 0, y: 10 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: easeOut },
+  },
+};
+
 export const layoutTransition = {
   layout: { duration: 0.36, ease: easeOut },
   opacity: { duration: 0.22 },

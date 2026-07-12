@@ -2,22 +2,32 @@ import {
   preUniversityAchievements,
   preUniversityArchivePeriod,
 } from "../content";
+import { motion, useReducedMotion } from "motion/react";
+import { sectionReveal, sectionRevealGroup } from "../motion";
 
 export function PreUniversityRecord() {
   const [grade10, grade11, grade12, regionalFirst, nationalFinal, aprilOlympiad] = preUniversityAchievements;
+  const reduce = useReducedMotion();
 
   return (
-    <section className="foundation-section foundation-archive-section" aria-labelledby="foundation-title">
-      <div className="section-label foundation-section-label">
+    <motion.section
+      className="foundation-section foundation-archive-section"
+      aria-labelledby="foundation-title"
+      variants={reduce ? undefined : sectionRevealGroup}
+      initial={reduce ? false : "hidden"}
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.16 }}
+    >
+      <motion.div variants={reduce ? undefined : sectionReveal} className="section-label foundation-section-label">
         <span>02</span>
         <div>
           <p>Pre-university record</p>
           <time>{preUniversityArchivePeriod}</time>
         </div>
-      </div>
+      </motion.div>
 
-      <div className="foundation-main">
-        <div className="foundation-heading">
+      <motion.div variants={reduce ? undefined : sectionRevealGroup} className="foundation-main">
+        <motion.div variants={reduce ? undefined : sectionReveal} className="foundation-heading">
           <div>
             <p className="foundation-kicker">Informatics competition record</p>
             <h2 id="foundation-title">A record built before university.</h2>
@@ -25,11 +35,19 @@ export function PreUniversityRecord() {
           <p>
             A four-year evidence ledger connected by one continuous competition trajectory.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="foundation-archive">
+        <motion.div variants={reduce ? undefined : sectionReveal} className="foundation-archive">
           <div className="foundation-record-ledger foundation-timeline" aria-label="Pre-university competition trajectory">
-            <article className="foundation-timeline-node foundation-progression">
+            <motion.span
+              className="foundation-timeline-progress"
+              aria-hidden="true"
+              initial={reduce ? { scaleY: 1 } : { scaleY: 0 }}
+              whileInView={{ scaleY: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: reduce ? 0 : 0.72, ease: "easeOut" }}
+            />
+            <motion.article variants={reduce ? undefined : sectionReveal} className="foundation-timeline-node foundation-progression">
               <span className="foundation-timeline-marker" aria-hidden="true" />
               <span className="foundation-stage-index">01</span>
               <div className="foundation-stage-copy">
@@ -44,9 +62,9 @@ export function PreUniversityRecord() {
                   </li>
                 ))}
               </ol>
-            </article>
+            </motion.article>
 
-            <article className="foundation-timeline-node foundation-feature">
+            <motion.article variants={reduce ? undefined : sectionReveal} className="foundation-timeline-node foundation-feature">
               <span className="foundation-timeline-marker" aria-hidden="true" />
               <span className="foundation-stage-index">02</span>
               <div className="foundation-stage-copy">
@@ -61,9 +79,9 @@ export function PreUniversityRecord() {
                   </a>
                 ) : null}
               </div>
-            </article>
+            </motion.article>
 
-            <article className="foundation-timeline-node foundation-proof-stage">
+            <motion.article variants={reduce ? undefined : sectionReveal} className="foundation-timeline-node foundation-proof-stage">
               <span className="foundation-timeline-marker" aria-hidden="true" />
               <span className="foundation-stage-index">03—04</span>
               <div className="foundation-stage-copy">
@@ -80,10 +98,10 @@ export function PreUniversityRecord() {
                   <p>The 28th Traditional April 30 Olympiad · Informatics</p>
                 </div>
               </div>
-            </article>
+            </motion.article>
           </div>
-        </div>
-      </div>
-    </section>
+        </motion.div>
+      </motion.div>
+    </motion.section>
   );
 }

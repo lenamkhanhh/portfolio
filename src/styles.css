@@ -104,6 +104,9 @@ svg { display: block; }
 .header-cv { justify-self: end; gap: 8px; color: var(--blue); font-weight: 600; }
 
 .hero {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
   display: grid;
   grid-template-columns: minmax(0, 1.08fr) minmax(420px, .92fr);
   gap: clamp(56px, 8vw, 132px);
@@ -111,6 +114,19 @@ svg { display: block; }
   border-bottom: 1px solid var(--rule-strong);
   background: radial-gradient(ellipse at 32% 45%, rgba(245, 246, 242, .94) 0 21%, rgba(245, 246, 242, .78) 43%, rgba(245, 246, 242, .38) 76%, rgba(245, 246, 242, .22));
 }
+.hero-spectral-glint {
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  inset: 6% 6% 12% 34%;
+  background:
+    radial-gradient(ellipse at 68% 40%, rgba(80, 102, 255, .14), transparent 48%),
+    radial-gradient(ellipse at 42% 72%, rgba(188, 110, 255, .10), transparent 44%),
+    radial-gradient(ellipse at 88% 82%, rgba(242, 157, 105, .10), transparent 42%);
+  filter: blur(8px);
+  will-change: transform, opacity;
+}
+.hero > :not(.hero-spectral-glint) { position: relative; z-index: 1; }
 .hero-copy { max-width: 760px; }
 .overline, .section-label, .evidence-copy small, .project-tab-topline,
 .artifact-ledger small, .contact-kicker {
@@ -413,7 +429,18 @@ svg { display: block; }
   left: 20px;
   width: 2px;
   content: "";
-  background: linear-gradient(var(--blue) 0 68%, var(--rule-strong) 68% 100%);
+  background: var(--rule-strong);
+}
+.foundation-timeline-progress {
+  position: absolute;
+  z-index: 2;
+  top: 34px;
+  bottom: 32%;
+  left: 20px;
+  width: 2px;
+  background: var(--blue);
+  transform-origin: top;
+  will-change: transform;
 }
 .foundation-timeline-node {
   position: relative;
@@ -945,6 +972,7 @@ svg { display: block; }
   .foundation-archive { margin-top: 36px; }
   .foundation-timeline { padding-left: 52px; }
   .foundation-timeline::before { left: 20px; top: 26px; bottom: 26px; }
+  .foundation-timeline-progress { left: 20px; top: 26px; bottom: 32%; }
   .foundation-timeline-node,
   .foundation-feature {
     grid-template-columns: 1fr;

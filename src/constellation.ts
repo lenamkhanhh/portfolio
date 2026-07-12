@@ -30,7 +30,7 @@ export interface ProfileInput {
 }
 
 const desktopProfile: ConstellationProfile = { mode: "animated", nodeCount: 84, fps: 45, radius: 238 };
-const mobileProfile: ConstellationProfile = { mode: "animated", nodeCount: 32, fps: 22, radius: 172 };
+const mobileProfile: ConstellationProfile = { mode: "static", nodeCount: 32, fps: 0, radius: 172 };
 
 function seededRandom(seed: number) {
   let state = seed >>> 0;
@@ -45,7 +45,7 @@ function seededRandom(seed: number) {
 
 export function getConstellationProfile({ width, reducedMotion, saveData }: ProfileInput): ConstellationProfile {
   const profile = width <= 767 ? mobileProfile : desktopProfile;
-  return reducedMotion || saveData ? { ...profile, mode: "static", fps: 0 } : profile;
+  return reducedMotion || saveData || width <= 767 ? { ...profile, mode: "static", fps: 0 } : profile;
 }
 
 export function createConstellationNodes(seed: number, count: number): ConstellationNode[] {
