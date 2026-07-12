@@ -13,7 +13,7 @@ describe("living constellation field contract", () => {
     );
   });
 
-  it("uses the approved desktop and mobile quality budgets", () => {
+  it("uses the desktop quality budget and a static mobile frame", () => {
     const desktop = getConstellationProfile({ width: 1440, reducedMotion: false, saveData: false });
     const mobile = getConstellationProfile({ width: 390, reducedMotion: false, saveData: false });
 
@@ -21,10 +21,8 @@ describe("living constellation field contract", () => {
     expect(desktop.nodeCount).toBeLessThanOrEqual(90);
     expect(desktop.fps).toBeGreaterThanOrEqual(40);
     expect(desktop.fps).toBeLessThanOrEqual(45);
-    expect(mobile.nodeCount).toBeGreaterThanOrEqual(28);
-    expect(mobile.nodeCount).toBeLessThanOrEqual(36);
-    expect(mobile.fps).toBeGreaterThanOrEqual(20);
-    expect(mobile.fps).toBeLessThanOrEqual(24);
+    expect(mobile.mode).toBe("static");
+    expect(mobile.fps).toBe(0);
   });
 
   it("limits every node to three precomputed nearest neighbours", () => {
