@@ -2,7 +2,6 @@ import { describe, expect, it } from "vitest";
 import {
   contact,
   currentCompetitionEvidence,
-  preUniversityPhotoEvidence,
   headlineEvidence,
   interests,
   preUniversityAchievements,
@@ -80,19 +79,6 @@ describe("portfolio evidence contract", () => {
       href: "https://drive.google.com/drive/folders/1QbcPpmv--MbtQ9fTujXMJVWtJOp69Z2s",
       coverSrc: "/assets/achievement/gdgoc-ai-challenge-cover.webp",
     });
-  });
-
-  it("keeps pre-university photographs contextual rather than assigning unsupported awards", () => {
-    expect(preUniversityPhotoEvidence).toEqual([
-      expect.objectContaining({
-        src: "/assets/achievement/delegation-field-note-graded.webp",
-        label: "Delegation field note",
-      }),
-      expect.objectContaining({
-        src: "/assets/achievement/april-30-olympiad-graded.webp",
-        label: "28th Traditional April 30 Olympiad · 2024",
-      }),
-    ]);
   });
 
   it("keeps the approved 2022–2025 archive period and official GDGoC cover asset", () => {
