@@ -28,6 +28,13 @@ export interface WorkItem {
   action: string;
 }
 
+export interface PreUniversityAchievement {
+  event: string;
+  award: string;
+  context: string;
+  href?: string;
+}
+
 export const profile = {
   name: "LÊ NAM KHÁNH",
   shortName: "Nam Khánh",
@@ -110,6 +117,64 @@ export const trajectory: TrajectoryStage[] = [
     marker: "04",
   },
 ];
+
+export const preUniversityAchievements: PreUniversityAchievement[] = [
+  {
+    event: "Provincial Excellent Student Selection Examination",
+    award: "Third Prize",
+    context: "Informatics · Grade 10",
+  },
+  {
+    event: "Provincial Excellent Student Selection Examination",
+    award: "Third Prize",
+    context: "Informatics · Grade 11",
+  },
+  {
+    event: "Provincial Excellent Student Selection Examination",
+    award: "Second Prize",
+    context: "Informatics · Grade 12",
+  },
+  {
+    event: "The 30th National Young Informatics Contest",
+    award: "First Prize",
+    context: "Central Region · Table C2 · 2024",
+    href: "https://www.facebook.com/tuoitretinhninhthuan/posts/pfbid02wf7ZJXUyrVeDraiQnX2BvFnTZvxhPSGM8J4gWyLWsne4N9Y72ewgreu6dCNjHMSDl",
+  },
+  {
+    event: "The 30th National Young Informatics Contest",
+    award: "Honourable Mention",
+    context: "National Finals · 2024",
+  },
+  {
+    event: "The 28th Traditional April 30 Olympiad",
+    award: "Bronze Medal",
+    context: "Informatics · 2024",
+  },
+];
+
+export const currentCompetitionEvidence = {
+  result: "Top 20 Outstanding Team",
+  event: "GDGoC AI Challenge 2026",
+  team: "Khô gà xé xợi",
+  approach: "Reinforcement Learning",
+  href: "https://drive.google.com/drive/folders/1QbcPpmv--MbtQ9fTujXMJVWtJOp69Z2s",
+  coverSrc: "/assets/achievement/gdgoc-ai-challenge-cover.webp",
+} as const;
+
+export const preUniversityArchivePeriod = "2022–2025";
+
+export const preUniversityPhotoEvidence = [
+  {
+    src: "/assets/achievement/delegation-field-note-graded.webp",
+    label: "Delegation field note",
+    description: "Student competition delegation · 2024",
+  },
+  {
+    src: "/assets/achievement/april-30-olympiad-graded.webp",
+    label: "28th Traditional April 30 Olympiad · 2024",
+    description: "Informatics delegation · Vũng Tàu",
+  },
+] as const;
 
 export const work: WorkItem[] = [
   {

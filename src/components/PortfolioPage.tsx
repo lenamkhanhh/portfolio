@@ -3,9 +3,11 @@ import { motion, useReducedMotion } from "motion/react";
 import { contact, interests, profile } from "../content";
 import { heroGroup, heroItem } from "../motion";
 import { ContactPanel } from "./ContactPanel";
+import { CompetitionEvidence } from "./CompetitionEvidence";
 import { ResearchAtlasBackground } from "./ResearchAtlasBackground";
 import { EvidenceLedger } from "./EvidenceLedger";
 import { ProjectEvidence } from "./ProjectEvidence";
+import { PreUniversityRecord } from "./PreUniversityRecord";
 import { TrajectoryRail } from "./TrajectoryRail";
 
 export function PortfolioPage() {
@@ -68,11 +70,13 @@ export function PortfolioPage() {
       </section>
 
       <TrajectoryRail />
+      <PreUniversityRecord />
+      <CompetitionEvidence />
       <ProjectEvidence />
 
       <section className="interests-section" aria-labelledby="interests-title">
         <div className="section-label">
-          <span>03</span>
+          <span>05</span>
           <p>Current interests</p>
         </div>
         <div>

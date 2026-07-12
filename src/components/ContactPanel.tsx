@@ -5,7 +5,7 @@ export function ContactPanel() {
   return (
     <footer className="contact-panel" id="contact">
       <div className="section-label">
-        <span>04</span>
+        <span>06</span>
         <p>Start a conversation</p>
       </div>
       <div className="contact-copy">

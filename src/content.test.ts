@@ -1,8 +1,12 @@
 import { describe, expect, it } from "vitest";
 import {
   contact,
+  currentCompetitionEvidence,
+  preUniversityPhotoEvidence,
   headlineEvidence,
   interests,
+  preUniversityAchievements,
+  preUniversityArchivePeriod,
   profile,
   trajectory,
   work,
@@ -41,6 +45,59 @@ describe("portfolio evidence contract", () => {
       "Computer Vision",
       "Large Language Models",
     ]);
+  });
+
+  it("keeps the confirmed pre-university Informatics record specific and chronological", () => {
+    expect(preUniversityAchievements).toEqual([
+      expect.objectContaining({ award: "Third Prize", context: "Informatics · Grade 10" }),
+      expect.objectContaining({ award: "Third Prize", context: "Informatics · Grade 11" }),
+      expect.objectContaining({ award: "Second Prize", context: "Informatics · Grade 12" }),
+      expect.objectContaining({ award: "First Prize", context: "Central Region · Table C2 · 2024" }),
+      expect.objectContaining({ award: "Honourable Mention", context: "National Finals · 2024" }),
+      expect.objectContaining({ award: "Bronze Medal", context: "Informatics · 2024" }),
+    ]);
+  });
+
+  it("keeps the proof-led record grouped around its verified progression and official source", () => {
+    expect(preUniversityAchievements.slice(0, 3).map((achievement) => achievement.award)).toEqual([
+      "Third Prize",
+      "Third Prize",
+      "Second Prize",
+    ]);
+    expect(preUniversityAchievements[3]).toMatchObject({
+      award: "First Prize",
+      context: "Central Region · Table C2 · 2024",
+    });
+    expect(preUniversityAchievements[3]).toHaveProperty("href", "https://www.facebook.com/tuoitretinhninhthuan/posts/pfbid02wf7ZJXUyrVeDraiQnX2BvFnTZvxhPSGM8J4gWyLWsne4N9Y72ewgreu6dCNjHMSDl");
+  });
+
+  it("records the verified GDGoC team result without inflating its scope", () => {
+    expect(currentCompetitionEvidence).toEqual({
+      result: "Top 20 Outstanding Team",
+      event: "GDGoC AI Challenge 2026",
+      team: "Khô gà xé xợi",
+      approach: "Reinforcement Learning",
+      href: "https://drive.google.com/drive/folders/1QbcPpmv--MbtQ9fTujXMJVWtJOp69Z2s",
+      coverSrc: "/assets/achievement/gdgoc-ai-challenge-cover.webp",
+    });
+  });
+
+  it("keeps pre-university photographs contextual rather than assigning unsupported awards", () => {
+    expect(preUniversityPhotoEvidence).toEqual([
+      expect.objectContaining({
+        src: "/assets/achievement/delegation-field-note-graded.webp",
+        label: "Delegation field note",
+      }),
+      expect.objectContaining({
+        src: "/assets/achievement/april-30-olympiad-graded.webp",
+        label: "28th Traditional April 30 Olympiad · 2024",
+      }),
+    ]);
+  });
+
+  it("keeps the approved 2022–2025 archive period and official GDGoC cover asset", () => {
+    expect(preUniversityArchivePeriod).toBe("2022–2025");
+    expect(currentCompetitionEvidence).toHaveProperty("coverSrc", "/assets/achievement/gdgoc-ai-challenge-cover.webp");
   });
 
   it("keeps every selected work item honest and inspectable", () => {

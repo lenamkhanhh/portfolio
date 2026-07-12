@@ -14,7 +14,7 @@ export function ProjectEvidence() {
     <section className="work-section" id="work">
       <div className="section-heading">
         <div className="section-label">
-          <span>02</span>
+          <span>04</span>
           <p>Selected evidence</p>
         </div>
         <div>
