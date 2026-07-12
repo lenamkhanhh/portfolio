@@ -19,9 +19,12 @@ const supportingImages = [
 export function CompetitionEvidence() {
   return (
     <section className="competition-section" id="competition" aria-labelledby="competition-title">
-      <div className="section-label">
+      <div className="section-label competition-section-label">
         <span>03</span>
-        <p>Competition evidence</p>
+        <div>
+          <p>University competition record</p>
+          <time>2026</time>
+        </div>
       </div>
 
       <div className="competition-story">

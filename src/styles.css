@@ -377,6 +377,23 @@ svg { display: block; }
   text-transform: uppercase;
 }
 .foundation-section-label time { color: var(--muted); font: 11px var(--mono); letter-spacing: .045em; }
+.competition-section-label {
+  align-self: start;
+  align-items: flex-start;
+  gap: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--rule-strong);
+}
+.competition-section-label > span { font: 500 12px var(--mono); }
+.competition-section-label > div { display: grid; gap: 14px; }
+.competition-section-label p {
+  max-width: 150px;
+  color: var(--ink);
+  font: 500 11px/1.45 var(--mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.competition-section-label time { color: var(--muted); font: 11px var(--mono); letter-spacing: .045em; }
 .foundation-heading {
   grid-template-columns: minmax(420px, 1fr) minmax(250px, .46fr);
   padding-top: 18px;
@@ -882,20 +899,27 @@ svg { display: block; }
 }
 
 @media (max-width: 1050px) {
-  .foundation-section-label {
+  .foundation-section-label,
+  .competition-section-label {
     display: grid;
     grid-template-columns: 48px 1fr;
   }
-  .foundation-section-label > div { grid-template-columns: 1fr auto; align-items: start; }
-  .foundation-section-label p { max-width: none; }
+  .foundation-section-label > div,
+  .competition-section-label > div { grid-template-columns: 1fr auto; align-items: start; }
+  .foundation-section-label p,
+  .competition-section-label p { max-width: none; }
 }
 
 @media (max-width: 760px) {
   .foundation-section { gap: 28px; }
-  .foundation-section-label { grid-template-columns: 34px 1fr; gap: 12px; padding-top: 14px; }
-  .foundation-section-label > div { gap: 10px; }
-  .foundation-section-label p { font-size: 10px; }
-  .foundation-section-label time { font-size: 10px; white-space: nowrap; }
+  .foundation-section-label,
+  .competition-section-label { grid-template-columns: 34px 1fr; gap: 12px; padding-top: 14px; }
+  .foundation-section-label > div,
+  .competition-section-label > div { gap: 10px; }
+  .foundation-section-label p,
+  .competition-section-label p { font-size: 10px; }
+  .foundation-section-label time,
+  .competition-section-label time { font-size: 10px; white-space: nowrap; }
   .foundation-heading { grid-template-columns: 1fr; gap: 20px; padding-top: 14px; }
   .foundation-heading h2 { font-size: clamp(40px, 12vw, 56px); }
   .foundation-archive { margin-top: 36px; }
