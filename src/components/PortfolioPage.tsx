@@ -9,6 +9,8 @@ import { EvidenceLedger } from "./EvidenceLedger";
 import { ProjectEvidence } from "./ProjectEvidence";
 import { PreUniversityRecord } from "./PreUniversityRecord";
 import { TrajectoryRail } from "./TrajectoryRail";
+import { ApiProjectGallery } from "./ApiProjectGallery";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function PortfolioPage() {
   const reduce = useReducedMotion();
@@ -26,10 +28,13 @@ export function PortfolioPage() {
           <a href="#trajectory">Trajectory</a>
           <a href="#contact">Contact</a>
         </nav>
-        <a className="header-cv" href={contact.cv.href} download>
-          <DownloadSimple aria-hidden="true" />
-          CV
-        </a>
+        <div className="header-actions">
+          <ThemeToggle />
+          <a className="header-cv" href={contact.cv.href} download>
+            <DownloadSimple aria-hidden="true" />
+            CV
+          </a>
+        </div>
       </header>
 
       <section className="hero" id="top">
@@ -80,6 +85,7 @@ export function PortfolioPage() {
       <PreUniversityRecord />
       <CompetitionEvidence />
       <ProjectEvidence />
+      <ApiProjectGallery />
 
       <section className="interests-section" aria-labelledby="interests-title">
         <div className="section-label">

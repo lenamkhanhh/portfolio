@@ -4,11 +4,15 @@ import { AnimatePresence, LayoutGroup, motion, useReducedMotion } from "motion/r
 import { work } from "../content";
 import { layoutTransition } from "../motion";
 import { ArtifactPreview } from "./ArtifactPreview";
+import { filterProjects } from "../course/projectFilters";
 
 export function ProjectEvidence() {
   const [active, setActive] = useState(0);
+  const [query, setQuery] = useState("");
   const reduce = useReducedMotion();
-  const selected = work[active];
+  const filteredWork = filterProjects(work, query);
+  const safeActive = Math.min(active, Math.max(filteredWork.length - 1, 0));
+  const selected = filteredWork[safeActive];
 
   return (
     <section className="work-section" id="work">
@@ -25,17 +29,33 @@ export function ProjectEvidence() {
         </div>
       </div>
 
+      <label className="project-search">
+        <span>Search selected projects</span>
+        <input
+          type="search"
+          value={query}
+          onChange={(event) => {
+            setQuery(event.target.value);
+            setActive(0);
+          }}
+          placeholder="Search by title, description, or technology…"
+        />
+      </label>
+
+      {filteredWork.length === 0 ? (
+        <p className="project-empty" role="status">No projects match “{query}”.</p>
+      ) : (
       <LayoutGroup>
         <div className="project-tabs" role="tablist" aria-label="Selected work">
-          {work.map((item, index) => (
+          {filteredWork.map((item, index) => (
             <motion.button
               layout
               transition={reduce ? { duration: 0 } : layoutTransition}
-              className={active === index ? "project-tab active" : "project-tab"}
+              className={safeActive === index ? "project-tab active" : "project-tab"}
               onClick={() => setActive(index)}
               role="tab"
               id={`project-tab-${index}`}
-              aria-selected={active === index}
+              aria-selected={safeActive === index}
               aria-controls="selected-project-detail"
               key={item.title}
             >
@@ -48,7 +68,7 @@ export function ProjectEvidence() {
               </span>
               <span className="project-tab-title">{item.title}</span>
               <span>{item.focus}</span>
-              {active === index && (
+              {safeActive === index && (
                 <motion.span className="active-rule" layoutId="active-project-rule" />
               )}
             </motion.button>
@@ -61,7 +81,7 @@ export function ProjectEvidence() {
             id="selected-project-detail"
             className="project-detail"
             role="tabpanel"
-            aria-labelledby={`project-tab-${active}`}
+            aria-labelledby={`project-tab-${safeActive}`}
             aria-live="polite"
             key={selected.title}
             initial={reduce ? false : { opacity: 0, y: 8 }}
@@ -69,7 +89,7 @@ export function ProjectEvidence() {
             exit={reduce ? undefined : { opacity: 0, y: -6 }}
             transition={reduce ? { duration: 0 } : layoutTransition}
           >
-            <div className="project-detail-index">0{active + 1}</div>
+            <div className="project-detail-index">0{safeActive + 1}</div>
             <div className="project-detail-copy">
               <span className="status-pill">{selected.status}</span>
               <h3>{selected.title}</h3>
@@ -87,6 +107,7 @@ export function ProjectEvidence() {
           </motion.article>
         </AnimatePresence>
       </LayoutGroup>
+      )}
     </section>
   );
 }

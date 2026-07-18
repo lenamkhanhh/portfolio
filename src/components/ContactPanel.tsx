@@ -1,5 +1,6 @@
 import { ArrowUpRight, DownloadSimple, EnvelopeSimple, GithubLogo } from "@phosphor-icons/react";
 import { contact } from "../content";
+import { ContactForm } from "./ContactForm";
 
 export function ContactPanel() {
   return (
@@ -30,6 +31,7 @@ export function ContactPanel() {
           GitHub
         </a>
       </div>
+      <ContactForm />
       <div className="contact-meta">
         <a href={contact.email.href}>{contact.email.value}</a>
         <a href={contact.phone.href}>{contact.phone.value}</a>
