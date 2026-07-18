@@ -59,4 +59,46 @@ describe("projects REST API", () => {
     const response = await request(app).post("/api/projects").send({ title: "" }).expect(400);
     expect(response.body).toEqual({ error: "Invalid project data" });
   });
+
+  it("serves health, detail, full replacement, and safe not-found responses", async () => {
+    await request(app).get("/api/health").expect(200, { status: "ok" });
+    await request(app).get("/api/projects/portfolio").expect(200);
+
+    const replacement = {
+      title: "Replaced Portfolio",
+      description: "Full PUT replacement",
+      image: "https://example.com/replaced.png",
+      technologies: ["ReactJS"],
+      link: "https://example.com/replaced",
+    };
+    const replaced = await request(app).put("/api/projects/portfolio").send(replacement).expect(200);
+    expect(replaced.body.data).toMatchObject(replacement);
+
+    await request(app).get("/api/projects/missing").expect(404, { error: "Project not found" });
+    await request(app).put("/api/projects/missing").send(replacement).expect(404);
+    await request(app).patch("/api/projects/missing").send({ title: "Missing" }).expect(404);
+    await request(app).delete("/api/projects/missing").expect(404);
+    await request(app).get("/missing-route").expect(404, { error: "Route not found" });
+  });
+
+  it("rejects malformed updates and untrusted browser origins", async () => {
+    await request(app).patch("/api/projects/portfolio").send({}).expect(400);
+    await request(app).put("/api/projects/portfolio").send({ title: "Incomplete" }).expect(400);
+    await request(app).get("/api/projects").set("Origin", "https://untrusted.example").expect(403, {
+      error: "Origin is not allowed",
+    });
+  });
+
+  it("rejects non-HTTP project links", async () => {
+    await request(app)
+      .post("/api/projects")
+      .send({
+        title: "Unsafe project",
+        description: "Unsafe link scheme",
+        image: "/unsafe.png",
+        technologies: ["ReactJS"],
+        link: "javascript:alert(1)",
+      })
+      .expect(400, { error: "Invalid project data" });
+  });
 });

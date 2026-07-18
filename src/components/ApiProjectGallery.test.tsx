@@ -36,4 +36,21 @@ describe("ApiProjectGallery", () => {
 
     await waitFor(() => expect(fetchMock).toHaveBeenLastCalledWith("/api/projects?q=react"));
   });
+
+  it("shows safe empty and error states", async () => {
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValueOnce({ ok: true, json: async () => ({ data: [] }) })
+      .mockResolvedValueOnce({ ok: false });
+    vi.stubGlobal("fetch", fetchMock);
+
+    const { unmount } = render(<ApiProjectGallery />);
+    expect(await screen.findByText("No API projects match this search.")).toBeTruthy();
+    unmount();
+
+    render(<ApiProjectGallery />);
+    expect((await screen.findByRole("alert")).textContent).toBe(
+      "The projects API is unavailable. Start the API server and try again.",
+    );
+  });
 });
