@@ -181,7 +181,6 @@ export const ktcIdeathonEvidence = {
   href: "https://github.com/Mhoaii/HrClaw",
   reelHref: "https://www.facebook.com/reel/2529462844182785",
   stageSrc: "/assets/achievement/ktc-ideathon-2026-stage-group.webp",
-  khanhSrc: "/assets/achievement/ktc-ideathon-2026-khanh-focus.webp",
   awardSrc: "/assets/achievement/ktc-ideathon-2026-stage-award.webp",
 } as const;
 

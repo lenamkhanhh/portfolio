@@ -43,20 +43,14 @@ const aiGallery = [
 const ktcGallery = [
   {
     src: ktcIdeathonEvidence.stageSrc,
-    label: "Stage & Banner",
-    caption: "Official Stage Backdrop at Cobi Work: May Matching Week · HACKATHON IDEA: SOLVE WITH AI (LIKELION, KOSME, JOBKOREA).",
+    label: "Toàn cảnh sân khấu",
+    caption: "Vòng Chung Kết tại Cobi Work: Toàn thể thí sinh, BTC và ban giám khảo LIKELION, KOSME, JOBKOREA.",
     alt: "KTC Ideathon 2026 finals stage group photo with official backdrop and organizers",
   },
   {
-    src: ktcIdeathonEvidence.khanhSrc,
-    label: "On-Stage Focus",
-    caption: "Le Nam Khanh on stage with finalists during the closing ceremony.",
-    alt: "Le Nam Khanh on stage at KTC Ideathon 2026 finals",
-  },
-  {
     src: ktcIdeathonEvidence.awardSrc,
-    label: "Award Ceremony",
-    caption: "Teammate Phan Minh Hoai on stage receiving award during the ceremony.",
+    label: "Khoảnh khắc trao giải",
+    caption: "Đồng đội Phan Minh Hoài nhận phần thưởng trên sân khấu dưới phông nền Hackathon: Solve with AI.",
     alt: "Teammate Phan Minh Hoai receiving award on stage at KTC Ideathon 2026",
   },
 ] as const;
@@ -231,77 +225,37 @@ export function CompetitionEvidence() {
           </div>
         </motion.article>
 
-        {/* K-Tech College Ideathon 2026 - Interactive Split Dossier & Gallery */}
-        <motion.article variants={reduce ? undefined : photoReveal} className="ai-challenge-dossier-card">
-          <div className="ai-dossier-col">
-            <div className="ai-dossier-kicker-row">
-              <span className="ai-kicker-tag">HACKATHON FINALIST · LIKELION & KOSME · 2026</span>
-              <span className="ai-kicker-year">2026</span>
-            </div>
-
-            <h3 className="ai-dossier-title">{ktcIdeathonEvidence.event}</h3>
-            <div className="ai-dossier-result-badge">{ktcIdeathonEvidence.result}</div>
-
-            <p className="ai-dossier-team">
-              <b>Finalist</b> · Team <b>HrClaw</b> ({ktcIdeathonEvidence.team}) · {ktcIdeathonEvidence.focus}
-            </p>
-
-            <div className="ai-dossier-paper">
-              <span className="paper-label">AI RECRUITMENT AGENT · SMART CV MATCHING</span>
-              <p>
-                An intelligent recruiting copilot powered by Gemini 2.0 Flash to semantically parse candidate resumes, compute multi-criteria alignment scores against job descriptions, and generate contextual interview screening questions.
-              </p>
-            </div>
-
-            <dl className="ai-dossier-metrics">
-              <div>
-                <dt>Hackathon Track</dt>
-                <dd>Idea: Solve with AI</dd>
-              </div>
-              <div>
-                <dt>Technology Stack</dt>
-                <dd>Gemini 2.0 Flash · Next.js · MongoDB</dd>
-              </div>
-              <div>
-                <dt>Organizers & Host</dt>
-                <dd>LIKELION · KOSME · JOBKOREA</dd>
-              </div>
-            </dl>
-
-            <div className="ai-dossier-actions">
-              <a className="ai-action-btn primary" href={ktcIdeathonEvidence.href} target="_blank" rel="noreferrer">
-                <span>View HrClaw repository</span>
-                <ArrowUpRight aria-hidden="true" />
-              </a>
-              <a className="ai-action-btn secondary" href={ktcIdeathonEvidence.reelHref} target="_blank" rel="noreferrer">
-                <span>Watch official recap video</span>
-                <ArrowUpRight aria-hidden="true" />
-              </a>
-            </div>
-          </div>
-
-          <div className="ai-gallery-col">
-            <div className="ai-gallery-frame">
+        {/* K-Tech College Ideathon 2026 - Hackathon Spotlight Card */}
+        <motion.article variants={reduce ? undefined : photoReveal} className="ktc-spotlight-card">
+          <div className="ktc-spotlight-media">
+            <div className="ktc-spotlight-frame">
               <img
                 key={activeKtcPhoto.src}
-                className="ai-gallery-photo"
+                className="ktc-spotlight-img"
                 src={activeKtcPhoto.src}
                 alt={activeKtcPhoto.alt}
                 decoding="async"
               />
               <span className="photo-index" aria-hidden="true">EVIDENCE 05</span>
+              {ktcIdx === 0 && (
+                <div className="ktc-spotlight-locator">
+                  <span className="ktc-locator-dot" aria-hidden="true" />
+                  <span>Lê Nam Khánh (Team HrClaw · Đứng ngoài cùng bên trái)</span>
+                </div>
+              )}
             </div>
-            <div className="ai-gallery-bar">
-              <figcaption className="ai-gallery-caption">
-                <span>Field note / Finals</span>
+
+            <div className="ktc-media-bar">
+              <div className="ktc-caption-col">
+                <span className="ktc-caption-kicker">May Matching Week · Cobi Work</span>
                 <p>{activeKtcPhoto.caption}</p>
-              </figcaption>
-              <div className="ai-gallery-switcher" role="tablist" aria-label="KTC evidence switcher">
+              </div>
+              <div className="ktc-switcher" role="tablist" aria-label="KTC evidence switcher">
                 {ktcGallery.map((item, idx) => (
                   <button
                     key={item.label}
                     type="button"
-                    className={ktcIdx === idx ? "ai-switcher-tab active" : "ai-switcher-tab"}
+                    className={ktcIdx === idx ? "ktc-tab active" : "ktc-tab"}
                     onClick={() => setKtcIdx(idx)}
                     role="tab"
                     aria-selected={ktcIdx === idx}
@@ -309,6 +263,57 @@ export function CompetitionEvidence() {
                     {item.label}
                   </button>
                 ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="ktc-spotlight-body">
+            <div className="ktc-body-main">
+              <div className="ktc-body-kicker-row">
+                <span className="ktc-kicker-tag">HACKATHON FINALIST · LIKELION & KOSME · 2026</span>
+                <span className="ktc-kicker-year">2026</span>
+              </div>
+
+              <h3 className="ktc-spotlight-title">{ktcIdeathonEvidence.event}</h3>
+              <div className="ktc-result-pill">{ktcIdeathonEvidence.result}</div>
+
+              <p className="ktc-team-line">
+                Team <b>HrClaw</b> ({ktcIdeathonEvidence.team}) · <b>{ktcIdeathonEvidence.focus}</b>
+              </p>
+
+              <div className="ktc-project-desc-box">
+                <span className="ktc-desc-label">PROJECT · HRCLAW RECRUITMENT AGENT</span>
+                <p>
+                  An intelligent recruiting copilot powered by Gemini 2.0 Flash to semantically parse candidate resumes, compute multi-criteria alignment scores against job descriptions, and generate contextual interview screening questions.
+                </p>
+              </div>
+            </div>
+
+            <div className="ktc-body-side">
+              <dl className="ktc-specs-list">
+                <div>
+                  <dt>Hackathon Track</dt>
+                  <dd>Idea: Solve with AI</dd>
+                </div>
+                <div>
+                  <dt>Technology Stack</dt>
+                  <dd>Gemini 2.0 Flash · Next.js · MongoDB</dd>
+                </div>
+                <div>
+                  <dt>Organizers & Host</dt>
+                  <dd>LIKELION · KOSME · JOBKOREA</dd>
+                </div>
+              </dl>
+
+              <div className="ktc-action-buttons">
+                <a className="ai-action-btn primary" href={ktcIdeathonEvidence.href} target="_blank" rel="noreferrer">
+                  <span>View HrClaw repository</span>
+                  <ArrowUpRight aria-hidden="true" />
+                </a>
+                <a className="ai-action-btn secondary" href={ktcIdeathonEvidence.reelHref} target="_blank" rel="noreferrer">
+                  <span>Watch official recap video</span>
+                  <ArrowUpRight aria-hidden="true" />
+                </a>
               </div>
             </div>
           </div>
