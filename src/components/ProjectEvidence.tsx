@@ -20,7 +20,7 @@ export function ProjectEvidence() {
         <div>
           <h2>Work in public, without inflated claims.</h2>
           <p>
-            Three current artifacts that show how I structure learning, build early ideas, and explain algorithms.
+            Selected technical artifacts demonstrating interactive systems, multimodal retrieval algorithms, desktop developer tools, and competitive programming foundations.
           </p>
         </div>
       </div>
