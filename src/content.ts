@@ -1,6 +1,6 @@
 export type EvidenceTone = "academic" | "competitive" | "achievement";
 export type WorkStatus = "Current work" | "Early project" | "Evolving notes" | "Live learning tool";
-export type ArtifactKind = "training" | "voxel" | "fft";
+export type ArtifactKind = "retrieval" | "workbench" | "switcher" | "training" | "voxel" | "fft";
 
 export interface EvidenceItem {
   label: string;
@@ -39,10 +39,10 @@ export const profile = {
   name: "LÊ NAM KHÁNH",
   shortName: "Nam Khánh",
   school: "University of Science, VNU-HCM (HCMUS)",
-  degree: "Information Technology · First-year student",
-  thesis: "From algorithms to research questions.",
+  degree: "Information Technology · Student",
+  thesis: "From algorithms to multimodal AI research.",
   intro:
-    "Competitive programming trained how I reason under constraints. I am now building the mathematical and technical foundations for AI research.",
+    "Competitive programming trained how I reason under constraints. I design and build end-to-end multimodal video retrieval pipelines, temporal event alignment algorithms, and verifiable AI systems.",
 };
 
 export const contact = {
@@ -70,10 +70,11 @@ export const contact = {
 
 export const headlineEvidence: EvidenceItem[] = [
   {
-    label: "GPA",
-    value: "7.95 / 10",
-    context: "First semester at HCMUS",
+    label: "AI Challenge 2026",
+    value: "Finalist · Bảng A",
+    context: "Reply 404 · SOICT Paper First Author",
     tone: "academic",
+    href: "https://github.com/lenamkhanhh/HCMAIC-Retrieval",
   },
   {
     label: "Codeforces",
@@ -147,6 +148,18 @@ export const preUniversityAchievements: PreUniversityAchievement[] = [
   },
 ];
 
+export const aiChallengeEvidence = {
+  result: "Finalist · Bảng A",
+  event: "AI Challenge HCMC 2026",
+  team: "Reply 404",
+  focus: "Multimodal Video Retrieval · GEMTRA DP Alignment",
+  paper: "SOICT 2026 Full Paper First Author",
+  href: "https://github.com/lenamkhanhh/HCMAIC-Retrieval",
+  coverSrc: "/assets/achievement/ai-challenge-2026-team-backdrop.webp",
+  certSrc: "/assets/achievement/ai-challenge-2026-certificate.webp",
+  stageSrc: "/assets/achievement/ai-challenge-2026-team-stage.webp",
+} as const;
+
 export const currentCompetitionEvidence = {
   result: "Top 20 Outstanding Team",
   event: "GDGoC AI Challenge 2026",
@@ -160,8 +173,44 @@ export const preUniversityArchivePeriod = "2022–2025";
 
 export const work: WorkItem[] = [
   {
-    title: "ICPC Solo Training System",
+    title: "Reply 404 Video Retrieval",
     status: "Current work",
+    type: "Multimodal retrieval system",
+    focus: "SigLIP2 · GEMTRA DP Alignment · DRES API",
+    detail:
+      "An interactive multimodal video search platform indexing 1,487 videos and 533K keyframes with sub-7ms temporal DP alignment (GEMTRA) and evidence-linked VQA for AI Challenge HCMC 2026.",
+    artifact: "1,487 videos · 533K keyframes · GEMTRA DP engine (6.6ms) · Evidence VQA · SOICT 2026 Paper",
+    artifactKind: "retrieval",
+    href: "https://github.com/lenamkhanhh/HCMAIC-Retrieval",
+    action: "Open retrieval repository",
+  },
+  {
+    title: "TripFlow Workbench",
+    status: "Current work",
+    type: "Collaborative web platform",
+    focus: "React 19 · TypeScript · Firebase · Firestore Rules",
+    detail:
+      "A realtime collaborative travel planning workbench with authentication, multi-view timelines, priority assignment, group expense splitting, and realtime synchronization.",
+    artifact: "Overview · Timeline planning · Expense split ledger · Member synchronization",
+    artifactKind: "workbench",
+    href: "https://mxhuit26.vercel.app/final-group/",
+    action: "Open live workbench",
+  },
+  {
+    title: "AI Account Switcher",
+    status: "Current work",
+    type: "Desktop application & local gateway",
+    focus: "Tauri · Rust · React · Local API Gateway",
+    detail:
+      "A desktop application to manage and switch between multi-account AI coding tools (Claude Code, Codex) with an OpenAI-compatible local proxy gateway and real-time quota tracking.",
+    artifact: "Tauri desktop app · Local OpenAI-compatible gateway · CLI wrappers · Quota tracking",
+    artifactKind: "switcher",
+    href: "https://github.com/lenamkhanhh/ai-switcher",
+    action: "Open project repository",
+  },
+  {
+    title: "ICPC Solo Training System",
+    status: "Live learning tool",
     type: "Learning system",
     focus: "Algorithms · Data Structures",
     detail:
@@ -171,35 +220,11 @@ export const work: WorkItem[] = [
     href: "https://github.com/lenamkhanhh/CP",
     action: "Open training evidence",
   },
-  {
-    title: "VoxelCode",
-    status: "Early project",
-    type: "Interactive project",
-    focus: "C++ · Visual learning",
-    detail:
-      "An early interactive programming project currently being prepared for a clearer public release and technical write-up.",
-    artifact: "Interactive programming environment · early public prototype",
-    artifactKind: "voxel",
-    href: "https://voxelcode.vercel.app/",
-    action: "Open current prototype",
-  },
-  {
-    title: "FFT Learning Notes",
-    status: "Live learning tool",
-    type: "Interactive study project",
-    focus: "Mathematics · Algorithms · JavaScript",
-    detail:
-      "An interactive notebook for exploring radix-2 FFT output, spectrum bins, and the butterfly structure from first principles.",
-    artifact: "Spectrum explorer · butterfly stages · tested radix-2 implementation",
-    artifactKind: "fft",
-    href: "https://fft-learning.vercel.app/",
-    action: "Open interactive notebook",
-  },
 ];
 
 export const interests = [
-  "Machine Learning",
-  "Natural Language Processing",
-  "Computer Vision",
-  "Large Language Models",
+  "Multimodal Video Retrieval",
+  "Temporal Event Reasoning",
+  "Vision-Language Models",
+  "AI Agent Systems & Security",
 ] as const;

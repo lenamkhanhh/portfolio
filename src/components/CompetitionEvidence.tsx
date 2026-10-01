@@ -1,6 +1,6 @@
 import { ArrowUpRight } from "@phosphor-icons/react";
 import { motion, useReducedMotion } from "motion/react";
-import { currentCompetitionEvidence } from "../content";
+import { aiChallengeEvidence, currentCompetitionEvidence } from "../content";
 import { photoReveal, sectionReveal, sectionRevealGroup } from "../motion";
 
 const supportingImages = [
@@ -101,6 +101,27 @@ export function CompetitionEvidence() {
         </div>
 
         <motion.article variants={reduce ? undefined : photoReveal} className="competition-current-proof">
+          <img className="ai-challenge-cover" src={aiChallengeEvidence.coverSrc} alt="Hội thi Thử thách Trí tuệ Nhân tạo TP.HCM 2026 - Vòng Chung Kết" />
+          <div className="ai-challenge-overlay">
+            <p>Major University Record · Vòng Chung Kết 2026</p>
+            <span>{aiChallengeEvidence.event}</span>
+            <h3>{aiChallengeEvidence.result}</h3>
+            <small>Team {aiChallengeEvidence.team} · {aiChallengeEvidence.focus}</small>
+            <small style={{ marginTop: "6px", color: "#aebff4" }}>{aiChallengeEvidence.paper}</small>
+            <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", alignItems: "center" }}>
+              <a href={aiChallengeEvidence.href} target="_blank" rel="noreferrer">
+                View system repository & paper
+                <ArrowUpRight aria-hidden="true" />
+              </a>
+              <a href={aiChallengeEvidence.certSrc} target="_blank" rel="noreferrer" style={{ borderColor: "#aebff4" }}>
+                View certificate & badge
+                <ArrowUpRight aria-hidden="true" />
+              </a>
+            </div>
+          </div>
+        </motion.article>
+
+        <motion.article variants={reduce ? undefined : photoReveal} className="competition-current-proof" style={{ marginTop: "18px", minHeight: "340px" }}>
           <img className="ai-challenge-cover" src={currentCompetitionEvidence.coverSrc} alt="GDGoC AI Challenge 2026 cover artwork" />
           <div className="ai-challenge-overlay">
             <p>Additional university record · 2026</p>

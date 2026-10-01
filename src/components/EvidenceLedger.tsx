@@ -1,9 +1,9 @@
-import { ArrowUpRight, BracketsCurly, GraduationCap, Trophy } from "@phosphor-icons/react";
+import { ArrowUpRight, BracketsCurly, Trophy } from "@phosphor-icons/react";
 import { motion, useReducedMotion } from "motion/react";
 import { headlineEvidence } from "../content";
 import { heroItem } from "../motion";
 
-const icons = [GraduationCap, BracketsCurly, Trophy];
+const icons = [Trophy, BracketsCurly, Trophy];
 
 export function EvidenceLedger() {
   const reduce = useReducedMotion();

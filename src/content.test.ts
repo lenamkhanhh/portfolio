@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  aiChallengeEvidence,
   contact,
   currentCompetitionEvidence,
   headlineEvidence,
@@ -15,14 +16,14 @@ describe("portfolio evidence contract", () => {
   it("keeps the verified academic identity without exposing a phone number", () => {
     expect(profile.name).toBe("LÊ NAM KHÁNH");
     expect(profile.school).toBe("University of Science, VNU-HCM (HCMUS)");
-    expect(profile.degree).toContain("First-year");
+    expect(profile.degree).toContain("Student");
     expect(contact.email.value).toBe("lenamkhanh07082007@gmail.com");
     expect(contact).not.toHaveProperty("phone");
   });
 
   it("surfaces only the three verified headline facts", () => {
     expect(headlineEvidence).toEqual([
-      expect.objectContaining({ label: "GPA", value: "7.95 / 10" }),
+      expect.objectContaining({ label: "AI Challenge 2026", value: "Finalist · Bảng A" }),
       expect.objectContaining({ label: "Codeforces", value: "Expert · 1796" }),
       expect.objectContaining({
         label: "HCMUS Coding Challenge",
@@ -31,7 +32,7 @@ describe("portfolio evidence contract", () => {
     ]);
   });
 
-  it("describes a direction instead of claiming research experience", () => {
+  it("describes a direction toward multimodal AI research", () => {
     expect(trajectory.map((stage) => stage.title)).toEqual([
       "Algorithms",
       "Competitive Programming",
@@ -39,10 +40,10 @@ describe("portfolio evidence contract", () => {
       "Current Interests",
     ]);
     expect(interests).toEqual([
-      "Machine Learning",
-      "Natural Language Processing",
-      "Computer Vision",
-      "Large Language Models",
+      "Multimodal Video Retrieval",
+      "Temporal Event Reasoning",
+      "Vision-Language Models",
+      "AI Agent Systems & Security",
     ]);
   });
 
@@ -70,6 +71,20 @@ describe("portfolio evidence contract", () => {
     expect(preUniversityAchievements[3]).toHaveProperty("href", "https://www.facebook.com/tuoitretinhninhthuan/posts/pfbid02wf7ZJXUyrVeDraiQnX2BvFnTZvxhPSGM8J4gWyLWsne4N9Y72ewgreu6dCNjHMSDl");
   });
 
+  it("records the verified AI Challenge HCMC 2026 result and evidence assets", () => {
+    expect(aiChallengeEvidence).toEqual({
+      result: "Finalist · Bảng A",
+      event: "AI Challenge HCMC 2026",
+      team: "Reply 404",
+      focus: "Multimodal Video Retrieval · GEMTRA DP Alignment",
+      paper: "SOICT 2026 Full Paper First Author",
+      href: "https://github.com/lenamkhanhh/HCMAIC-Retrieval",
+      coverSrc: "/assets/achievement/ai-challenge-2026-team-backdrop.webp",
+      certSrc: "/assets/achievement/ai-challenge-2026-certificate.webp",
+      stageSrc: "/assets/achievement/ai-challenge-2026-team-stage.webp",
+    });
+  });
+
   it("records the verified GDGoC team result without inflating its scope", () => {
     expect(currentCompetitionEvidence).toEqual({
       result: "Top 20 Outstanding Team",
@@ -87,26 +102,23 @@ describe("portfolio evidence contract", () => {
   });
 
   it("keeps every selected work item honest and inspectable", () => {
-    expect(work).toHaveLength(3);
+    expect(work).toHaveLength(4);
     expect(work.every((item) => item.href.startsWith("https://"))).toBe(true);
     expect(work.every((item) => item.status.length > 0)).toBe(true);
     expect(work.every((item) => item.artifact.length > 0)).toBe(true);
-    expect(work.find((item) => item.title === "FFT Learning Notes")).toMatchObject({
-      href: "https://fft-learning.vercel.app/",
-      status: "Live learning tool",
+    expect(work.find((item) => item.title === "Reply 404 Video Retrieval")).toMatchObject({
+      href: "https://github.com/lenamkhanhh/HCMAIC-Retrieval",
+      status: "Current work",
     });
   });
 
-  it("does not model unsupported career or impact claims", () => {
+  it("does not model unsupported career claims", () => {
     const serialized = JSON.stringify({ profile, headlineEvidence, work });
     for (const forbidden of [
-      "publication",
       "employment",
       "testimonial",
       "researchImpact",
       "solvedCount",
-      "benchmark",
-      "accuracy",
     ]) {
       expect(serialized).not.toContain(forbidden);
     }

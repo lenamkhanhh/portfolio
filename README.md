@@ -11,10 +11,10 @@ Personal portfolio for **Le Nam Khanh**, a first-year Information Technology stu
 
 ## Highlights
 
-- GPA **7.95 / 10** after the first semester at HCMUS
+- **Finalist · Bảng A**, AI Challenge HCMC 2026 (Reply 404, SOICT 2026 First Author)
 - Codeforces **Expert**, maximum rating **1796**
 - **Champion**, HCMUS Coding Challenge 2026
-- Current direction: algorithms and competitive programming → AI foundations and research questions
+- Current direction: competitive programming & algorithms → multimodal video retrieval & AI systems
 
 The portfolio intentionally avoids unsupported claims about employment, publications, research impact, lab affiliation, testimonials, or project metrics.
 
