@@ -170,6 +170,21 @@ export const currentCompetitionEvidence = {
   coverSrc: "/assets/achievement/gdgoc-ai-challenge-cover.webp",
 } as const;
 
+export const ktcIdeathonEvidence = {
+  result: "Finalist · Vòng Chung Kết",
+  event: "K-Tech College Ideathon 2026",
+  subEvent: "Hackathon: Idea · Solve with AI",
+  role: "Finalist · Team HrClaw",
+  team: "HrClaw (Phan Minh Hoài, Lê Nam Khánh)",
+  organizers: "LIKELION Vietnam · K-Tech College · KOSME · JOBKOREA",
+  focus: "AI Recruitment Agent for Smart CV Matching",
+  href: "https://github.com/Mhoaii/HrClaw",
+  reelHref: "https://www.facebook.com/reel/2529462844182785",
+  stageSrc: "/assets/achievement/ktc-ideathon-2026-stage-group.webp",
+  khanhSrc: "/assets/achievement/ktc-ideathon-2026-khanh-focus.webp",
+  awardSrc: "/assets/achievement/ktc-ideathon-2026-stage-award.webp",
+} as const;
+
 export const preUniversityArchivePeriod = "2022–2025";
 
 export const work: WorkItem[] = [

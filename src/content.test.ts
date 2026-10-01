@@ -5,6 +5,7 @@ import {
   currentCompetitionEvidence,
   headlineEvidence,
   interests,
+  ktcIdeathonEvidence,
   preUniversityAchievements,
   preUniversityArchivePeriod,
   profile,
@@ -94,6 +95,23 @@ describe("portfolio evidence contract", () => {
       approach: "Reinforcement Learning",
       href: "https://drive.google.com/drive/folders/1QbcPpmv--MbtQ9fTujXMJVWtJOp69Z2s",
       coverSrc: "/assets/achievement/gdgoc-ai-challenge-cover.webp",
+    });
+  });
+
+  it("records the verified KTC Ideathon 2026 hackathon finalist result and assets", () => {
+    expect(ktcIdeathonEvidence).toEqual({
+      result: "Finalist · Vòng Chung Kết",
+      event: "K-Tech College Ideathon 2026",
+      subEvent: "Hackathon: Idea · Solve with AI",
+      role: "Finalist · Team HrClaw",
+      team: "HrClaw (Phan Minh Hoài, Lê Nam Khánh)",
+      organizers: "LIKELION Vietnam · K-Tech College · KOSME · JOBKOREA",
+      focus: "AI Recruitment Agent for Smart CV Matching",
+      href: "https://github.com/Mhoaii/HrClaw",
+      reelHref: "https://www.facebook.com/reel/2529462844182785",
+      stageSrc: "/assets/achievement/ktc-ideathon-2026-stage-group.webp",
+      khanhSrc: "/assets/achievement/ktc-ideathon-2026-khanh-focus.webp",
+      awardSrc: "/assets/achievement/ktc-ideathon-2026-stage-award.webp",
     });
   });
 

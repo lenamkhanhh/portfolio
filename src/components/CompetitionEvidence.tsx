@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ArrowUpRight } from "@phosphor-icons/react";
 import { motion, useReducedMotion } from "motion/react";
-import { aiChallengeEvidence, currentCompetitionEvidence } from "../content";
+import { aiChallengeEvidence, currentCompetitionEvidence, ktcIdeathonEvidence } from "../content";
 import { photoReveal, sectionReveal, sectionRevealGroup } from "../motion";
 
 const supportingImages = [
@@ -40,10 +40,33 @@ const aiGallery = [
   },
 ] as const;
 
+const ktcGallery = [
+  {
+    src: ktcIdeathonEvidence.stageSrc,
+    label: "Stage & Banner",
+    caption: "Official Stage Backdrop at Cobi Work: May Matching Week · HACKATHON IDEA: SOLVE WITH AI (LIKELION, KOSME, JOBKOREA).",
+    alt: "KTC Ideathon 2026 finals stage group photo with official backdrop and organizers",
+  },
+  {
+    src: ktcIdeathonEvidence.khanhSrc,
+    label: "On-Stage Focus",
+    caption: "Le Nam Khanh on stage with finalists during the closing ceremony.",
+    alt: "Le Nam Khanh on stage at KTC Ideathon 2026 finals",
+  },
+  {
+    src: ktcIdeathonEvidence.awardSrc,
+    label: "Award Ceremony",
+    caption: "Teammate Phan Minh Hoai on stage receiving award during the ceremony.",
+    alt: "Teammate Phan Minh Hoai receiving award on stage at KTC Ideathon 2026",
+  },
+] as const;
+
 export function CompetitionEvidence() {
   const reduce = useReducedMotion();
   const [galleryIdx, setGalleryIdx] = useState(0);
   const activePhoto = aiGallery[galleryIdx];
+  const [ktcIdx, setKtcIdx] = useState(0);
+  const activeKtcPhoto = ktcGallery[ktcIdx];
 
   return (
     <motion.section
@@ -208,11 +231,94 @@ export function CompetitionEvidence() {
           </div>
         </motion.article>
 
+        {/* K-Tech College Ideathon 2026 - Interactive Split Dossier & Gallery */}
+        <motion.article variants={reduce ? undefined : photoReveal} className="ai-challenge-dossier-card">
+          <div className="ai-dossier-col">
+            <div className="ai-dossier-kicker-row">
+              <span className="ai-kicker-tag">HACKATHON FINALIST · LIKELION & KOSME · 2026</span>
+              <span className="ai-kicker-year">2026</span>
+            </div>
+
+            <h3 className="ai-dossier-title">{ktcIdeathonEvidence.event}</h3>
+            <div className="ai-dossier-result-badge">{ktcIdeathonEvidence.result}</div>
+
+            <p className="ai-dossier-team">
+              <b>Finalist</b> · Team <b>HrClaw</b> ({ktcIdeathonEvidence.team}) · {ktcIdeathonEvidence.focus}
+            </p>
+
+            <div className="ai-dossier-paper">
+              <span className="paper-label">AI RECRUITMENT AGENT · SMART CV MATCHING</span>
+              <p>
+                An intelligent recruiting copilot powered by Gemini 2.0 Flash to semantically parse candidate resumes, compute multi-criteria alignment scores against job descriptions, and generate contextual interview screening questions.
+              </p>
+            </div>
+
+            <dl className="ai-dossier-metrics">
+              <div>
+                <dt>Hackathon Track</dt>
+                <dd>Idea: Solve with AI</dd>
+              </div>
+              <div>
+                <dt>Technology Stack</dt>
+                <dd>Gemini 2.0 Flash · Next.js · MongoDB</dd>
+              </div>
+              <div>
+                <dt>Organizers & Host</dt>
+                <dd>LIKELION · KOSME · JOBKOREA</dd>
+              </div>
+            </dl>
+
+            <div className="ai-dossier-actions">
+              <a className="ai-action-btn primary" href={ktcIdeathonEvidence.href} target="_blank" rel="noreferrer">
+                <span>View HrClaw repository</span>
+                <ArrowUpRight aria-hidden="true" />
+              </a>
+              <a className="ai-action-btn secondary" href={ktcIdeathonEvidence.reelHref} target="_blank" rel="noreferrer">
+                <span>Watch official recap video</span>
+                <ArrowUpRight aria-hidden="true" />
+              </a>
+            </div>
+          </div>
+
+          <div className="ai-gallery-col">
+            <div className="ai-gallery-frame">
+              <img
+                key={activeKtcPhoto.src}
+                className="ai-gallery-photo"
+                src={activeKtcPhoto.src}
+                alt={activeKtcPhoto.alt}
+                decoding="async"
+              />
+              <span className="photo-index" aria-hidden="true">EVIDENCE 05</span>
+            </div>
+            <div className="ai-gallery-bar">
+              <figcaption className="ai-gallery-caption">
+                <span>Field note / Finals</span>
+                <p>{activeKtcPhoto.caption}</p>
+              </figcaption>
+              <div className="ai-gallery-switcher" role="tablist" aria-label="KTC evidence switcher">
+                {ktcGallery.map((item, idx) => (
+                  <button
+                    key={item.label}
+                    type="button"
+                    className={ktcIdx === idx ? "ai-switcher-tab active" : "ai-switcher-tab"}
+                    onClick={() => setKtcIdx(idx)}
+                    role="tab"
+                    aria-selected={ktcIdx === idx}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </motion.article>
+
         {/* GDGoC AI Challenge Record */}
         <motion.article variants={reduce ? undefined : photoReveal} className="gdoc-dossier-card">
           <div className="gdoc-card-kicker">
             <span>ADDITIONAL UNIVERSITY RECORD · 2026</span>
-            <span className="photo-index-inline">EVIDENCE 05</span>
+            <span className="photo-index-inline">EVIDENCE 06</span>
           </div>
           <div className="gdoc-card-content">
             <div className="gdoc-card-copy">

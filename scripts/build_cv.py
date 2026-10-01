@@ -290,8 +290,8 @@ def draw_achievements(c: canvas.Canvas, x: float, y_top: float, w: float) -> Non
     row_h = box_h / 3
     cells = [
         (("AI Challenge HCMC 2026", "Finalist (Bảng A) | Team Lead, Reply 404"), ("HCMUS Coding Challenge", "Champion | 2026")),
-        (("SOICT 2026 Full Paper", "First & Corresponding Author (LNCS)"), ("Codeforces", "Expert | Max rating 1796")),
-        (("National Young Informatics", "First Prize (Central) | Nat'l Honourable Mention"), ("Provincial & Olympic 30/4", "Provincial 2nd & 3rd Prizes | Bronze Medal")),
+        (("KTC Ideathon 2026", "Finalist (HrClaw) | LIKELION & KOSME"), ("Codeforces", "Expert | Max rating 1796")),
+        (("SOICT 2026 Full Paper", "First & Corresponding Author (LNCS)"), ("National & Provincial Contest", "1st Prize (Central), Prov. 2nd & 3rd Prizes")),
     ]
     for r, row in enumerate(cells):
         top = box_y + box_h - r * row_h
