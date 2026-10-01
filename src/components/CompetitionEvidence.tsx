@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { ArrowUpRight } from "@phosphor-icons/react";
+import {
+  ArrowUpRight,
+  Code,
+  GraduationCap,
+  TerminalWindow,
+  Trophy,
+} from "@phosphor-icons/react";
 import { motion, useReducedMotion } from "motion/react";
 import { aiChallengeEvidence, currentCompetitionEvidence, ktcIdeathonEvidence } from "../content";
 import { photoReveal, sectionReveal, sectionRevealGroup } from "../motion";
@@ -65,15 +71,61 @@ export function CompetitionEvidence() {
 
       <motion.div variants={reduce ? undefined : sectionRevealGroup} className="competition-story">
         <motion.div variants={reduce ? undefined : sectionReveal} className="competition-copy">
-          <p className="competition-kicker">University competition record</p>
+          <div className="coding-challenge-kicker-row">
+            <span className="coding-challenge-pill">
+              <Trophy size={13} weight="fill" aria-hidden="true" />
+              <span>Grand Champion · Rank 1</span>
+            </span>
+            <p className="competition-kicker">University competition record</p>
+          </div>
           <h2 id="competition-title">HCMUS Coding Challenge <span>2026</span></h2>
-          <p className="competition-result">Champion.</p>
+
+          <div className="competition-champion-card">
+            <div className="champion-badge-icon">
+              <Trophy size={26} weight="fill" aria-hidden="true" />
+            </div>
+            <div className="champion-badge-body">
+              <span className="champion-award-title">First Place Champion</span>
+              <p className="champion-award-subtitle">Faculty of Information Technology · HCMUS, VNU-HCM</p>
+            </div>
+          </div>
+
           <p className="competition-intro">
-            Competitive programming is where I practise turning mathematical ideas into correct,
-            efficient implementations under time constraints. This result records one step in that
-            continuing practice.
+            Competitive programming is where I practice transforming mathematical abstractions and combinatorial invariants into zero-overhead, edge-case-proof implementations under strict real-time constraints.
           </p>
-          <dl className="competition-facts">
+
+          <div className="competition-metrics-grid" aria-label="Competition specifications">
+            <div className="comp-metric-card">
+              <div className="comp-metric-header">
+                <Trophy size={14} className="metric-icon gold" aria-hidden="true" />
+                <span>Standing</span>
+              </div>
+              <strong>Rank 1 / Champion</strong>
+            </div>
+            <div className="comp-metric-card">
+              <div className="comp-metric-header">
+                <GraduationCap size={14} className="metric-icon blue" aria-hidden="true" />
+                <span>Host</span>
+              </div>
+              <strong>FIT — HCMUS</strong>
+            </div>
+            <div className="comp-metric-card">
+              <div className="comp-metric-header">
+                <Code size={14} className="metric-icon emerald" aria-hidden="true" />
+                <span>Domain</span>
+              </div>
+              <strong>Algorithms & DS</strong>
+            </div>
+            <div className="comp-metric-card">
+              <div className="comp-metric-header">
+                <TerminalWindow size={14} className="metric-icon purple" aria-hidden="true" />
+                <span>Format</span>
+              </div>
+              <strong>ICPC · Speed & Precision</strong>
+            </div>
+          </div>
+
+          <dl className="sr-only competition-facts">
             <div>
               <dt>Result</dt>
               <dd>Champion</dd>
@@ -102,8 +154,8 @@ export function CompetitionEvidence() {
             <span className="photo-index" aria-hidden="true">EVIDENCE 01</span>
           </div>
           <figcaption>
-            <span>Field note / HCMUS</span>
-            <p>The award, participant, and university context remain visible in one frame.</p>
+            <span>Award Presentation / HCMUS</span>
+            <p>First Place Champion award board in front of the Faculty of Information Technology, HCMUS.</p>
           </figcaption>
         </motion.figure>
 
@@ -118,6 +170,7 @@ export function CompetitionEvidence() {
                   decoding="async"
                 />
                 <span className="photo-index" aria-hidden="true">EVIDENCE 0{index + 2}</span>
+                <span className="photo-overlay-tag">{index === 0 ? "Contest Terminal" : "Live Solving Stage"}</span>
               </div>
               <figcaption>{image.label}</figcaption>
             </motion.figure>
