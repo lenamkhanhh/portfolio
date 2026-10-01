@@ -289,7 +289,7 @@ def draw_achievements(c: canvas.Canvas, x: float, y_top: float, w: float) -> Non
     col_w = w / 2
     row_h = box_h / 3
     cells = [
-        (("AI Challenge HCMC 2026", "Finalist (Bảng A) | Team Reply 404"), ("HCMUS Coding Challenge", "Champion | 2026")),
+        (("AI Challenge HCMC 2026", "Finalist (Bảng A) | Team Lead, Reply 404"), ("HCMUS Coding Challenge", "Champion | 2026")),
         (("SOICT 2026 Full Paper", "First & Corresponding Author (LNCS)"), ("Codeforces", "Expert | Max rating 1796")),
         (("National Young Informatics", "First Prize (Central) | Nat'l Honourable Mention"), ("Provincial & Olympic 30/4", "Provincial 2nd & 3rd Prizes | Bronze Medal")),
     ]
@@ -340,8 +340,8 @@ def draw_projects(c: canvas.Canvas, x: float, y_top: float, w: float) -> None:
         w,
         card_h,
         "Reply 404 — Video Retrieval System",
-        "Python | SigLIP2 | FAISS | GEMTRA DP Alignment | DRES API",
-        "Engineered an interactive multimodal video search platform for 1,487 videos & 533K keyframes with sub-7ms temporal DP alignment (GEMTRA) and evidence-linked VQA under AIC countdowns.",
+        "Team Lead & Core Architect | Python, SigLIP2, GEMTRA DP, DRES API",
+        "Led 4-member team to design and build an interactive video search platform for 1,487 videos & 533K keyframes with sub-7ms temporal DP alignment (GEMTRA) and evidence-linked VQA under AIC countdowns.",
         "SOICT 2026 Paper | GitHub / HCMAIC-Retrieval",
     )
     project_card(

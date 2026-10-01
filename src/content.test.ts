@@ -75,7 +75,8 @@ describe("portfolio evidence contract", () => {
     expect(aiChallengeEvidence).toEqual({
       result: "Finalist · Bảng A",
       event: "AI Challenge HCMC 2026",
-      team: "Reply 404",
+      role: "Team Lead & Core Architect",
+      team: "Reply 404 (Team Lead)",
       focus: "Multimodal Video Retrieval · GEMTRA DP Alignment",
       paper: "SOICT 2026 Full Paper First Author",
       href: "https://github.com/lenamkhanhh/HCMAIC-Retrieval",

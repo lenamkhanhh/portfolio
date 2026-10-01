@@ -72,7 +72,7 @@ export const headlineEvidence: EvidenceItem[] = [
   {
     label: "AI Challenge 2026",
     value: "Finalist · Bảng A",
-    context: "Reply 404 · SOICT Paper First Author",
+    context: "Team Lead, Reply 404 · SOICT First Author",
     tone: "academic",
     href: "https://github.com/lenamkhanhh/HCMAIC-Retrieval",
   },
@@ -151,7 +151,8 @@ export const preUniversityAchievements: PreUniversityAchievement[] = [
 export const aiChallengeEvidence = {
   result: "Finalist · Bảng A",
   event: "AI Challenge HCMC 2026",
-  team: "Reply 404",
+  role: "Team Lead & Core Architect",
+  team: "Reply 404 (Team Lead)",
   focus: "Multimodal Video Retrieval · GEMTRA DP Alignment",
   paper: "SOICT 2026 Full Paper First Author",
   href: "https://github.com/lenamkhanhh/HCMAIC-Retrieval",
@@ -176,10 +177,10 @@ export const work: WorkItem[] = [
     title: "Reply 404 Video Retrieval",
     status: "Current work",
     type: "Multimodal retrieval system",
-    focus: "SigLIP2 · GEMTRA DP Alignment · DRES API",
+    focus: "Team Lead & Core Architect · SigLIP2 · GEMTRA DP · DRES",
     detail:
-      "An interactive multimodal video search platform indexing 1,487 videos and 533K keyframes with sub-7ms temporal DP alignment (GEMTRA) and evidence-linked VQA for AI Challenge HCMC 2026.",
-    artifact: "1,487 videos · 533K keyframes · GEMTRA DP engine (6.6ms) · Evidence VQA · SOICT 2026 Paper",
+      "Led team Reply 404 to architect and deploy an interactive multimodal video search platform indexing 1,487 videos and 533K keyframes with sub-7ms temporal DP alignment (GEMTRA) and evidence-linked VQA for AI Challenge HCMC 2026.",
+    artifact: "Team Lead · 1,487 videos · 533K keyframes · GEMTRA DP engine (6.6ms) · SOICT 2026 Paper",
     artifactKind: "retrieval",
     href: "https://github.com/lenamkhanhh/HCMAIC-Retrieval",
     action: "Open retrieval repository",

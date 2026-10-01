@@ -128,7 +128,7 @@ export function CompetitionEvidence() {
         <motion.article variants={reduce ? undefined : photoReveal} className="ai-challenge-dossier-card">
           <div className="ai-dossier-col">
             <div className="ai-dossier-kicker-row">
-              <span className="ai-kicker-tag">MAJOR CITY & UNIVERSITY RECORD</span>
+              <span className="ai-kicker-tag">TEAM LEAD · MAJOR CITY & UNIVERSITY RECORD</span>
               <span className="ai-kicker-year">2026</span>
             </div>
 
@@ -136,7 +136,7 @@ export function CompetitionEvidence() {
             <div className="ai-dossier-result-badge">{aiChallengeEvidence.result}</div>
 
             <p className="ai-dossier-team">
-              Team <b>{aiChallengeEvidence.team}</b> · {aiChallengeEvidence.focus}
+              <b>Team Lead & Core Architect</b> · Team <b>Reply 404</b> · {aiChallengeEvidence.focus}
             </p>
 
             <div className="ai-dossier-paper">
