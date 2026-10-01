@@ -104,13 +104,12 @@ describe("portfolio evidence contract", () => {
       event: "K-Tech College Ideathon 2026",
       subEvent: "Hackathon: Idea · Solve with AI",
       role: "Finalist · Team HrClaw",
-      team: "HrClaw (Phan Minh Hoài, Lê Nam Khánh)",
+      team: "Phan Minh Hoài, Lê Nam Khánh",
       organizers: "LIKELION Vietnam · K-Tech College · KOSME · JOBKOREA",
       focus: "AI Recruitment Agent for Smart CV Matching",
       href: "https://github.com/Mhoaii/HrClaw",
       reelHref: "https://www.facebook.com/reel/2529462844182785",
       stageSrc: "/assets/achievement/ktc-ideathon-2026-stage-group.webp",
-      awardSrc: "/assets/achievement/ktc-ideathon-2026-stage-award.webp",
     });
   });
 

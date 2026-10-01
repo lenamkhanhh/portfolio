@@ -40,27 +40,10 @@ const aiGallery = [
   },
 ] as const;
 
-const ktcGallery = [
-  {
-    src: ktcIdeathonEvidence.stageSrc,
-    label: "Toàn cảnh sân khấu",
-    caption: "Vòng Chung Kết tại Cobi Work: Toàn thể thí sinh, BTC và ban giám khảo LIKELION, KOSME, JOBKOREA.",
-    alt: "KTC Ideathon 2026 finals stage group photo with official backdrop and organizers",
-  },
-  {
-    src: ktcIdeathonEvidence.awardSrc,
-    label: "Khoảnh khắc trao giải",
-    caption: "Đồng đội Phan Minh Hoài nhận phần thưởng trên sân khấu dưới phông nền Hackathon: Solve with AI.",
-    alt: "Teammate Phan Minh Hoai receiving award on stage at KTC Ideathon 2026",
-  },
-] as const;
-
 export function CompetitionEvidence() {
   const reduce = useReducedMotion();
   const [galleryIdx, setGalleryIdx] = useState(0);
   const activePhoto = aiGallery[galleryIdx];
-  const [ktcIdx, setKtcIdx] = useState(0);
-  const activeKtcPhoto = ktcGallery[ktcIdx];
 
   return (
     <motion.section
@@ -230,39 +213,18 @@ export function CompetitionEvidence() {
           <div className="ktc-spotlight-media">
             <div className="ktc-spotlight-frame">
               <img
-                key={activeKtcPhoto.src}
                 className="ktc-spotlight-img"
-                src={activeKtcPhoto.src}
-                alt={activeKtcPhoto.alt}
+                src={ktcIdeathonEvidence.stageSrc}
+                alt="KTC Ideathon 2026 finals stage group photo with official backdrop and organizers"
                 decoding="async"
               />
               <span className="photo-index" aria-hidden="true">EVIDENCE 05</span>
-              {ktcIdx === 0 && (
-                <div className="ktc-spotlight-locator">
-                  <span className="ktc-locator-dot" aria-hidden="true" />
-                  <span>Lê Nam Khánh (Team HrClaw · Đứng ngoài cùng bên trái)</span>
-                </div>
-              )}
             </div>
 
             <div className="ktc-media-bar">
               <div className="ktc-caption-col">
                 <span className="ktc-caption-kicker">May Matching Week · Cobi Work</span>
-                <p>{activeKtcPhoto.caption}</p>
-              </div>
-              <div className="ktc-switcher" role="tablist" aria-label="KTC evidence switcher">
-                {ktcGallery.map((item, idx) => (
-                  <button
-                    key={item.label}
-                    type="button"
-                    className={ktcIdx === idx ? "ktc-tab active" : "ktc-tab"}
-                    onClick={() => setKtcIdx(idx)}
-                    role="tab"
-                    aria-selected={ktcIdx === idx}
-                  >
-                    {item.label}
-                  </button>
-                ))}
+                <p>Vòng Chung Kết tại Cobi Work: Toàn thể thí sinh, BTC và ban giám khảo LIKELION, KOSME, JOBKOREA.</p>
               </div>
             </div>
           </div>
@@ -278,7 +240,7 @@ export function CompetitionEvidence() {
               <div className="ktc-result-pill">{ktcIdeathonEvidence.result}</div>
 
               <p className="ktc-team-line">
-                Team <b>HrClaw</b> ({ktcIdeathonEvidence.team}) · <b>{ktcIdeathonEvidence.focus}</b>
+                Team <b>HrClaw</b> · {ktcIdeathonEvidence.team}
               </p>
 
               <div className="ktc-project-desc-box">
@@ -319,19 +281,23 @@ export function CompetitionEvidence() {
           </div>
         </motion.article>
 
-        {/* GDGoC AI Challenge Record */}
-        <motion.article variants={reduce ? undefined : photoReveal} className="gdoc-dossier-card">
-          <div className="gdoc-card-kicker">
-            <span>ADDITIONAL UNIVERSITY RECORD · 2026</span>
-            <span className="photo-index-inline">EVIDENCE 06</span>
-          </div>
-          <div className="gdoc-card-content">
-            <div className="gdoc-card-copy">
-              <h3>{currentCompetitionEvidence.event}</h3>
-              <p className="gdoc-card-result">{currentCompetitionEvidence.result}</p>
-              <small>Team {currentCompetitionEvidence.team} · {currentCompetitionEvidence.approach}</small>
+        {/* GDGoC AI Challenge Record - Cyber Cover Card */}
+        <motion.article variants={reduce ? undefined : photoReveal} className="competition-current-proof gdgoc-proof-card">
+          <img
+            className="ai-challenge-cover"
+            src={currentCompetitionEvidence.coverSrc}
+            alt="GDGoC AI Challenge 2026 futuristic cover artwork"
+            decoding="async"
+          />
+          <div className="ai-challenge-overlay">
+            <div className="gdgoc-kicker-row">
+              <span className="gdgoc-kicker">ADDITIONAL UNIVERSITY RECORD · 2026</span>
+              <span className="photo-index-inline">EVIDENCE 06</span>
             </div>
-            <a className="gdoc-card-btn" href={currentCompetitionEvidence.href} target="_blank" rel="noreferrer">
+            <span className="gdgoc-event-name">{currentCompetitionEvidence.event}</span>
+            <h3 className="gdgoc-result">{currentCompetitionEvidence.result}</h3>
+            <p className="gdgoc-team-info">Team <b>{currentCompetitionEvidence.team}</b> · {currentCompetitionEvidence.approach}</p>
+            <a className="gdgoc-action-btn" href={currentCompetitionEvidence.href} target="_blank" rel="noreferrer">
               <span>View certificate evidence</span>
               <ArrowUpRight aria-hidden="true" />
             </a>
