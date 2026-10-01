@@ -2,6 +2,7 @@ import {
   preUniversityAchievements,
   preUniversityArchivePeriod,
 } from "../content";
+import { Certificate, Medal, TrendUp, Trophy } from "@phosphor-icons/react";
 import { motion, useReducedMotion } from "motion/react";
 import { sectionReveal, sectionRevealGroup } from "../motion";
 
@@ -55,10 +56,24 @@ export function PreUniversityRecord() {
                 <p>Provincial Excellent Student Selection Examination · Informatics</p>
               </div>
               <ol className="foundation-years">
-                {[grade10, grade11, grade12].map((achievement) => (
-                  <li key={achievement.context}>
-                    <span>{achievement.context.replace("Informatics · ", "")}</span>
+                {[
+                  { achievement: grade10, grade: "Grade 10", year: "2022", medal: "bronze" as const, rank: "Provincial HSG" },
+                  { achievement: grade11, grade: "Grade 11", year: "2023", medal: "bronze" as const, rank: "Provincial HSG" },
+                  { achievement: grade12, grade: "Grade 12", year: "2024", medal: "silver" as const, rank: "Provincial HSG · Rank Up", progressed: true },
+                ].map(({ achievement, grade, year, medal, rank, progressed }) => (
+                  <li key={achievement.context} className={`foundation-year-item medal-${medal}`}>
+                    <div className="foundation-year-top">
+                      <span className="foundation-year-grade">{grade}</span>
+                      <span className={`foundation-medal-pill ${medal}`}>
+                        <Medal size={14} aria-hidden="true" />
+                        <small>{year}</small>
+                      </span>
+                    </div>
                     <strong>{achievement.award}</strong>
+                    <span className="foundation-year-rank">
+                      {rank}
+                      {progressed && <TrendUp size={13} aria-hidden="true" className="rank-up-icon" />}
+                    </span>
                   </li>
                 ))}
               </ol>
@@ -68,7 +83,13 @@ export function PreUniversityRecord() {
               <span className="foundation-timeline-marker" aria-hidden="true" />
               <span className="foundation-stage-index">02</span>
               <div className="foundation-stage-copy">
-                <p>The 30th National Young Informatics Contest · 2024</p>
+                <div className="foundation-feature-kicker-row">
+                  <span className="foundation-trophy-badge">
+                    <Trophy size={14} aria-hidden="true" />
+                    <span>Regional Champion</span>
+                  </span>
+                  <p>The 30th National Young Informatics Contest · 2024</p>
+                </div>
                 <h3 className="foundation-feature-award">{regionalFirst.award}</h3>
               </div>
               <div className="foundation-feature-detail">
@@ -89,11 +110,23 @@ export function PreUniversityRecord() {
                 <p>Verified competition record · 2024</p>
               </div>
               <div className="foundation-proof-strip" aria-label="Additional verified distinctions">
-                <div>
+                <div className="foundation-distinction-card">
+                  <div className="distinction-badge-row">
+                    <span className="distinction-tag national">
+                      <Certificate size={15} aria-hidden="true" />
+                      <span>National Finals</span>
+                    </span>
+                  </div>
                   <strong>{nationalFinal.award}</strong>
                   <p>The 30th National Young Informatics Contest · National Finals</p>
                 </div>
-                <div>
+                <div className="foundation-distinction-card">
+                  <div className="distinction-badge-row">
+                    <span className="distinction-tag olympic">
+                      <Medal size={15} aria-hidden="true" />
+                      <span>Olympic 30/4</span>
+                    </span>
+                  </div>
                   <strong>{aprilOlympiad.award}</strong>
                   <p>The 28th Traditional April 30 Olympiad · Informatics</p>
                 </div>

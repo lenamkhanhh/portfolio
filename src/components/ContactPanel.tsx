@@ -9,10 +9,10 @@ export function ContactPanel() {
         <p>Start a conversation</p>
       </div>
       <div className="contact-copy">
-        <p className="contact-kicker">Open to internships and AI/CS lab opportunities</p>
-        <h2>Looking for a student who learns rigorously and builds in public?</h2>
+        <p className="contact-kicker">Open to internships & AI research lab opportunities</p>
+        <h2>Let's connect and build ambitious systems.</h2>
         <p>
-          I would value the chance to contribute, learn from a strong technical team, and discuss difficult problems.
+          Focused on multimodal video retrieval, temporal event reasoning, and high-performance AI engineering. Always open for research lab positions, software engineering internships, and technical discussions.
         </p>
       </div>
       <div className="contact-actions">

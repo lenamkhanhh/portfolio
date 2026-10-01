@@ -18,9 +18,9 @@ export function ProjectEvidence() {
           <p>Selected evidence</p>
         </div>
         <div>
-          <h2>Work in public, without inflated claims.</h2>
+          <h2>Production systems & research software.</h2>
           <p>
-            Selected technical artifacts demonstrating interactive systems, multimodal retrieval algorithms, desktop developer tools, and competitive programming foundations.
+            Interactive web applications, sub-second multimodal retrieval engines, and developer tools built with verified performance and open-source code.
           </p>
         </div>
       </div>
