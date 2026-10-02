@@ -743,13 +743,15 @@ svg { display: block; }
   background: transparent;
 }
 .foundation-distinction-card {
+  position: relative;
+  overflow: hidden;
   min-width: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   min-height: 100%;
   padding: 26px 24px;
-  background: rgba(255, 255, 255, .95);
+  background: #ffffff;
   border: 1px solid var(--rule-strong);
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, .035);
@@ -757,68 +759,175 @@ svg { display: block; }
 }
 .foundation-distinction-card.national-card {
   border-left: 4px solid var(--blue);
+  background: radial-gradient(circle at 92% 14%, rgba(29, 78, 216, 0.07) 0%, rgba(2, 132, 199, 0.025) 45%, #ffffff 80%);
 }
 .foundation-distinction-card.olympic-card {
   border-left: 4px solid #059669;
+  background: radial-gradient(circle at 92% 14%, rgba(5, 150, 105, 0.07) 0%, rgba(217, 119, 6, 0.035) 45%, #ffffff 80%);
 }
 .foundation-distinction-card:hover {
   background: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 8px 26px rgba(0, 0, 0, .07);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, .08);
 }
-.distinction-top-row {
+.distinction-watermark {
+  position: absolute;
+  right: -24px;
+  bottom: -24px;
+  width: 210px;
+  height: 210px;
+  pointer-events: none;
+  opacity: 0.12;
+  transition: all 0.4s cubic-bezier(.22, 1, .36, 1);
+  z-index: 0;
+}
+.foundation-distinction-card:hover .distinction-watermark {
+  opacity: 0.24;
+  transform: scale(1.08) rotate(3deg);
+}
+.distinction-card-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
 }
-.distinction-scope-badge {
+.distinction-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+.distinction-logo-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .08);
+  transition: transform 0.25s ease;
+}
+.foundation-distinction-card:hover .distinction-logo-box {
+  transform: scale(1.06);
+}
+.distinction-logo-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.distinction-brand-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.distinction-brand-edition {
+  font: 600 11px/1.3 var(--mono);
+  color: var(--ink);
+  letter-spacing: .03em;
+  text-transform: uppercase;
+}
+.distinction-brand-scope {
+  font: 500 11px/1.3 var(--mono);
+  color: var(--muted);
+  letter-spacing: .015em;
+}
+.distinction-status-pill {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   padding: 4px 10px;
-  border-radius: 4px;
+  border-radius: 999px;
   font: 600 10.5px var(--mono);
+  letter-spacing: .04em;
   text-transform: uppercase;
-  letter-spacing: .05em;
+  white-space: nowrap;
 }
-.distinction-scope-badge.national {
-  color: var(--blue);
-  background: rgba(56, 102, 255, .09);
-  border: 1px solid rgba(56, 102, 255, .25);
-}
-.distinction-scope-badge.olympic {
-  color: #059669;
-  background: rgba(16, 185, 129, .09);
-  border: 1px solid rgba(16, 185, 129, .25);
-}
-.foundation-medal-pill.national-finals {
+.distinction-status-pill.national {
   color: var(--blue);
   background: rgba(56, 102, 255, .1);
   border: 1px solid rgba(56, 102, 255, .25);
 }
+.distinction-status-pill.bronze {
+  color: #b45309;
+  background: rgba(245, 158, 11, .12);
+  border: 1px solid rgba(217, 119, 6, .3);
+}
+.distinction-award-block {
+  margin-bottom: 22px;
+  position: relative;
+  z-index: 1;
+}
+.distinction-tier-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 8px;
+  font: 600 11px var(--mono);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+.distinction-tier-tag.national {
+  color: var(--blue);
+}
+.distinction-tier-tag.olympic {
+  color: #059669;
+}
 .distinction-award-title {
   display: block;
-  margin: 0;
-  font-size: clamp(24px, 2.2vw, 30px);
+  margin: 0 0 6px;
+  font-size: clamp(26px, 2.3vw, 32px);
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -.035em;
   color: var(--ink);
   white-space: nowrap;
 }
-.distinction-contest-name {
-  margin: 10px 0 18px;
-  color: var(--muted);
-  font-size: 13.5px;
-  line-height: 1.5;
+.distinction-contest-title {
+  margin: 0 0 4px;
+  color: var(--ink);
+  font-size: 14.5px;
+  font-weight: 600;
+  line-height: 1.4;
 }
-.distinction-meta-row {
+.distinction-contest-vn {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  font-style: italic;
+  line-height: 1.45;
+}
+.distinction-card-footer {
+  border-top: 1px solid rgba(0, 0, 0, .07);
+  padding-top: 16px;
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  z-index: 1;
+}
+.distinction-authority {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 11.5px;
+}
+.authority-label {
+  font: 600 10.5px var(--mono);
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .03em;
+}
+.authority-val {
+  font: 500 11.5px var(--mono);
+  color: var(--ink);
+}
+.distinction-chips-row {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: auto;
 }
 .distinction-chip {
   display: inline-flex;
@@ -830,6 +939,17 @@ svg { display: block; }
   color: var(--muted);
   font: 500 10.5px var(--mono);
   letter-spacing: .02em;
+}
+.distinction-chip.highlight {
+  background: rgba(21, 72, 232, .07);
+  border-color: rgba(21, 72, 232, .22);
+  color: var(--blue);
+  font-weight: 600;
+}
+.olympic-card .distinction-chip.highlight {
+  background: rgba(5, 150, 105, .07);
+  border-color: rgba(5, 150, 105, .22);
+  color: #059669;
 }
 
 .competition-section {
@@ -1915,8 +2035,29 @@ svg { display: block; }
   .foundation-proof-stage { gap: 24px; }
   .foundation-proof-stage .foundation-stage-copy { padding-left: 12px; }
   .foundation-proof-strip { grid-template-columns: 1fr; margin-left: 0; width: 100%; gap: 16px; }
-  .foundation-distinction-card { padding: 18px 16px; }
-  .distinction-award-title { white-space: normal; }
+  .foundation-distinction-card { padding: 20px 18px; }
+  .distinction-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .distinction-brand {
+    width: 100%;
+  }
+  .distinction-status-pill {
+    align-self: flex-start;
+  }
+  .distinction-watermark {
+    width: 160px;
+    height: 160px;
+    right: -20px;
+    bottom: -20px;
+    opacity: 0.08;
+  }
+  .distinction-award-title {
+    font-size: clamp(24px, 7.5vw, 29px);
+    white-space: normal;
+  }
   .competition-champion-card { padding: 14px 16px; gap: 12px; }
   .champion-badge-icon { width: 38px; height: 38px; }
   .competition-metrics-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
