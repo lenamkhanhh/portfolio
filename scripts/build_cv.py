@@ -186,7 +186,7 @@ def draw_profile_and_education(c: canvas.Canvas) -> None:
     c.drawString(MARGIN_X + 8, y + h - 13, "University of Science, VNU-HCM (HCMUS)")
     para_in_box(
         c,
-        plain("Information Technology | Second-year student"),
+        plain("Information Technology | Student"),
         MARGIN_X + 8,
         y + h - 17,
         left_w - 16,
@@ -213,7 +213,7 @@ def draw_profile_and_education(c: canvas.Canvas) -> None:
 
 def draw_skills(c: canvas.Canvas, x: float, y_top: float, w: float) -> None:
     section_title(c, "Technical skills", x, y_top, CYAN)
-    box_y, box_h = y_top - 167, 156
+    box_y, box_h = y_top - 128, 116
     rounded_box(c, x, box_y, w, box_h, MINT, GRID, radius=1.5)
     rows = [
         ("Algorithms", "Data structures, graph algorithms, dynamic programming, constraint optimization"),
@@ -263,13 +263,13 @@ def achievement_cell(
         c,
         plain(text_title),
         x,
-        top - 6,
+        top - 5,
         w,
         bottom + 1,
         ACH_TITLE,
         f"achievement title {text_title}",
     )
-    body_top = top - 8 - title_h
+    body_top = top - 6 - title_h
     para_in_box(
         c,
         plain(text_value),
@@ -284,14 +284,15 @@ def achievement_cell(
 
 def draw_achievements(c: canvas.Canvas, x: float, y_top: float, w: float) -> None:
     section_title(c, "Achievements", x, y_top, CYAN)
-    box_y, box_h = y_top - 158, 147
+    box_y, box_h = y_top - 180, 168
     rounded_box(c, x, box_y, w, box_h, LAVENDER, GRID, radius=1.5)
     col_w = w / 2
-    row_h = box_h / 3
+    row_h = box_h / 4
     cells = [
-        (("AI Challenge HCMC 2026", "Finalist (Bảng A) | Team Lead, Reply 404"), ("HCMUS Coding Challenge", "Champion | 2026")),
-        (("KTC Ideathon 2026", "Finalist (HrClaw) | LIKELION & KOSME"), ("Codeforces", "Expert | Max rating 1796")),
-        (("SOICT 2026 Full Paper", "First & Corresponding Author (LNCS)"), ("National & Provincial Contest", "1st Prize (Central), Prov. 2nd & 3rd Prizes")),
+        (("AI Challenge HCMC 2026", "Finalist (Bảng A) | Team Lead, Reply 404"), ("HCMUS Coding Challenge", "Champion (Rank 1) | 2026")),
+        (("GDGoC AI Challenge 2026", "Top 20 Outstanding Team | RL Approach"), ("KTC Ideathon 2026", "Finalist (HrClaw) | LIKELION & KOSME")),
+        (("SOICT 2026 Full Paper", "First & Corresponding Author (LNCS)"), ("Codeforces", "Expert | Max rating 1796")),
+        (("National Young Informatics", "1st Prize (Central C2) & Finalist (2024)"), ("Olympiad 30/4 & Prov. HSG", "Bronze Medal | Prov. 2nd & 3rd Prizes")),
     ]
     for r, row in enumerate(cells):
         top = box_y + box_h - r * row_h
@@ -328,7 +329,7 @@ def project_card(c: canvas.Canvas, x: float, y: float, w: float, h: float, title
 def draw_projects(c: canvas.Canvas, x: float, y_top: float, w: float) -> None:
     section_title(c, "Selected projects", x, y_top, PURPLE)
     card_h = 69
-    gap = 6
+    gap = 7
     c1_y = y_top - 14 - card_h
     c2_y = c1_y - gap - card_h
     c3_y = c2_y - gap - card_h
@@ -367,7 +368,7 @@ def draw_projects(c: canvas.Canvas, x: float, y_top: float, w: float) -> None:
         "GitHub / ai-switcher",
     )
 
-    focus_h = 62
+    focus_h = 75
     focus_y = c3_y - gap - focus_h
     rounded_box(c, x, focus_y, w, focus_h, MINT, GRID, radius=1.5)
     c.setFillColor(CYAN)
@@ -379,26 +380,26 @@ def draw_projects(c: canvas.Canvas, x: float, y_top: float, w: float) -> None:
         x + 8,
         focus_y + focus_h - 18,
         w - 16,
-        focus_y + 26,
+        focus_y + 36,
         FOCUS_BODY,
         "research interests",
     )
     para_in_box(
         c,
-        plain("Also building competitive programming training artifacts and reproducible benchmarks."),
+        plain("Focusing on verifiable retrieval algorithms, multimodal alignment under resource constraints, and reproducible benchmarks."),
         x + 8,
-        focus_y + 24,
+        focus_y + 32,
         w - 16,
-        focus_y + 2,
+        focus_y + 4,
         FOCUS_BODY,
         "research interests note",
     )
 
 
 def draw_footer(c: canvas.Canvas) -> None:
-    y_top = 130
+    y_top = 142
     section_title(c, "Relevant strengths", MARGIN_X, y_top, PURPLE)
-    box_y, box_h = 32, 76
+    box_y, box_h = 38, 84
     rounded_box(c, MARGIN_X, box_y, CONTENT_W, box_h, PALE, GRID, radius=1.5)
     left_w = CONTENT_W / 2
     c.setStrokeColor(GRID)
@@ -440,7 +441,7 @@ def build() -> None:
     right_w = CONTENT_W * 0.49
     main_top = 493
     draw_skills(c, left_x, main_top, left_w)
-    draw_achievements(c, left_x, main_top - 181, left_w)
+    draw_achievements(c, left_x, 352, left_w)
     draw_projects(c, right_x, main_top, right_w)
     draw_footer(c)
     add_links(c)
