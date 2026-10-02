@@ -42,7 +42,7 @@ export const profile = {
   degree: "Information Technology · Student",
   thesis: "From algorithms to multimodal AI research.",
   intro:
-    "Rooted in competitive programming and algorithmic rigor, I design and build multimodal video retrieval pipelines, temporal event alignment algorithms, and verifiable AI systems.",
+    "IT student at HCMUS building multimodal video retrieval engines and verifiable AI systems, grounded in competitive programming.",
 };
 
 export const contact = {

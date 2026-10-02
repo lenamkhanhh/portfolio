@@ -15,6 +15,9 @@ export function PortfolioPage() {
 
   return (
     <main className="portfolio-shell">
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
       <ResearchAtlasBackground reducedMotion={Boolean(reduce)} />
       <header className="site-header">
         <a className="wordmark" href="#top" aria-label="Le Nam Khanh, back to top">
@@ -31,6 +34,8 @@ export function PortfolioPage() {
           CV
         </a>
       </header>
+
+      <div id="main-content" tabIndex={-1} className="main-content-anchor" />
 
       <section className="hero" id="top">
         <motion.span
@@ -71,8 +76,29 @@ export function PortfolioPage() {
           variants={reduce ? undefined : heroGroup}
           initial={reduce ? false : "hidden"}
           animate="visible"
+          className="hero-evidence-column"
         >
           <EvidenceLedger />
+          <div className="hero-project-teaser" aria-label="Featured engineering preview">
+            <div className="teaser-heading">
+              <span className="teaser-dot" aria-hidden="true" />
+              <span>Featured Engineering</span>
+            </div>
+            <div className="teaser-chips">
+              <a href="#work" className="teaser-chip">
+                <strong>Reply 404</strong>
+                <small>Multimodal Search</small>
+              </a>
+              <a href="#work" className="teaser-chip">
+                <strong>TripFlow</strong>
+                <small>Collaborative Web</small>
+              </a>
+              <a href="#work" className="teaser-chip">
+                <strong>AI Switcher</strong>
+                <small>Desktop Gateway</small>
+              </a>
+            </div>
+          </div>
         </motion.div>
       </section>
 

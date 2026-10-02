@@ -276,13 +276,9 @@ export function PreUniversityRecord() {
                       <GraduationCap size={13} aria-hidden="true" />
                       <span>Table C2 · Specialized High Schools</span>
                     </span>
-                    <span className="c2-tag seed">
-                      <SealCheck size={13} weight="fill" aria-hidden="true" />
-                      <span>Regional Seed #1</span>
-                    </span>
                   </div>
                   <p className="c2-dossier-desc">
-                    Secured 1st Place across Central Vietnam specialized high schools, advancing as the region's top representative to the National Finals in Hanoi.
+                    Secured First Place across Central Vietnam specialized high schools (Table C2), advancing to the National Finals in Hanoi.
                   </p>
                   <div className="c2-dossier-footer">
                     <span className="c2-organizer">Central Youth Union · MOST · MOET</span>
@@ -313,7 +309,7 @@ export function PreUniversityRecord() {
                         <YoungInformaticsLogo className="distinction-logo-svg" />
                       </div>
                       <div className="distinction-brand-meta">
-                        <span className="distinction-brand-edition">30th National Edition · 2024</span>
+                        <span className="distinction-brand-edition">30th Edition · 2024</span>
                         <span className="distinction-brand-scope">National Finals · Hanoi</span>
                       </div>
                     </div>
@@ -335,7 +331,7 @@ export function PreUniversityRecord() {
 
                   <div className="distinction-card-footer">
                     <div className="distinction-authority">
-                      <span className="authority-label">Authorized by:</span>
+                      <span className="authority-label">Organizers:</span>
                       <span className="authority-val">Central Youth Union · MOST · MOET</span>
                     </div>
                     <div className="distinction-chips-row">
@@ -353,8 +349,8 @@ export function PreUniversityRecord() {
                         <OlympicOlympiadLogo className="distinction-logo-svg" />
                       </div>
                       <div className="distinction-brand-meta">
-                        <span className="distinction-brand-edition">XXVIII Traditional Olympiad · 2024</span>
-                        <span className="distinction-brand-scope">Southern Elite Invitational</span>
+                        <span className="distinction-brand-edition">XXVIII Edition · 2024</span>
+                        <span className="distinction-brand-scope">Southern Invitational Olympiad</span>
                       </div>
                     </div>
                     <span className="distinction-status-pill bronze">
@@ -375,11 +371,11 @@ export function PreUniversityRecord() {
 
                   <div className="distinction-card-footer">
                     <div className="distinction-authority">
-                      <span className="authority-label">Organizing Chair:</span>
+                      <span className="authority-label">Host:</span>
                       <span className="authority-val">THPT Chuyên Lê Hồng Phong TP.HCM</span>
                     </div>
                     <div className="distinction-chips-row">
-                      <span className="distinction-chip highlight">50+ Specialized High Schools</span>
+                      <span className="distinction-chip highlight">Specialized High Schools</span>
                       <span className="distinction-chip">Informatics Division</span>
                     </div>
                   </div>
