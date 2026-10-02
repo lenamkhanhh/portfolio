@@ -3,8 +3,11 @@ import {
   ArrowUpRight,
   Code,
   GraduationCap,
+  SealCheck,
+  Sparkle,
   TerminalWindow,
   Trophy,
+  UsersThree,
 } from "@phosphor-icons/react";
 import { motion, useReducedMotion } from "motion/react";
 import { aiChallengeEvidence, currentCompetitionEvidence, ktcIdeathonEvidence } from "../content";
@@ -14,13 +17,15 @@ const supportingImages = [
   {
     src: "/assets/achievement/competition-focus-enhanced.webp",
     alt: "Le Nam Khanh concentrating at a computer during HCMUS Coding Challenge 2026",
-    label: "During the competition",
+    label: "During the competition · Algorithm formulation & implementation",
+    tag: "Contest Terminal",
     className: "competition-photo competition-photo-focus",
   },
   {
     src: "/assets/achievement/competition-stage-enhanced.webp",
     alt: "Le Nam Khanh solving a problem on stage at HCMUS Coding Challenge 2026",
-    label: "On-stage problem solving",
+    label: "On-stage problem solving & leaderboard tracking",
+    tag: "Live Solving Stage",
     className: "competition-photo competition-photo-stage",
   },
 ] as const;
@@ -70,114 +75,124 @@ export function CompetitionEvidence() {
       </motion.div>
 
       <motion.div variants={reduce ? undefined : sectionRevealGroup} className="competition-story">
-        <motion.div variants={reduce ? undefined : sectionReveal} className="competition-copy">
-          <div className="coding-challenge-kicker-row">
-            <span className="coding-challenge-pill">
-              <Trophy size={13} weight="fill" aria-hidden="true" />
-              <span>Grand Champion · Rank 1</span>
-            </span>
-            <p className="competition-kicker">University competition record</p>
-          </div>
-          <h2 id="competition-title">HCMUS Coding Challenge <span>2026</span></h2>
-
-          <div className="competition-champion-card">
-            <div className="champion-badge-icon">
-              <Trophy size={26} weight="fill" aria-hidden="true" />
-            </div>
-            <div className="champion-badge-body">
-              <span className="champion-award-title">First Place Champion</span>
-              <p className="champion-award-subtitle">Faculty of Information Technology · HCMUS, VNU-HCM</p>
-            </div>
-          </div>
-
-          <p className="competition-intro">
-            Competitive programming is where I practice transforming mathematical abstractions and combinatorial invariants into zero-overhead, edge-case-proof implementations under strict real-time constraints.
-          </p>
-
-          <div className="competition-metrics-grid" aria-label="Competition specifications">
-            <div className="comp-metric-card">
-              <div className="comp-metric-header">
-                <Trophy size={14} className="metric-icon gold" aria-hidden="true" />
-                <span>Standing</span>
+        {/* Record 01: HCMUS Coding Challenge 2026 - Spotlight Card */}
+        <motion.article variants={reduce ? undefined : photoReveal} className="coding-challenge-spotlight-card">
+          <div className="coding-challenge-grid">
+            <div className="competition-copy">
+              <div className="coding-challenge-kicker-row">
+                <span className="coding-challenge-pill">
+                  <Trophy size={13} weight="fill" aria-hidden="true" />
+                  <span>Grand Champion · Rank 1</span>
+                </span>
+                <p className="competition-kicker">FIT — HCMUS · UNIVERSITY RECORD 2026</p>
               </div>
-              <strong>Rank 1 / Champion</strong>
-            </div>
-            <div className="comp-metric-card">
-              <div className="comp-metric-header">
-                <GraduationCap size={14} className="metric-icon blue" aria-hidden="true" />
-                <span>Host</span>
-              </div>
-              <strong>FIT — HCMUS</strong>
-            </div>
-            <div className="comp-metric-card">
-              <div className="comp-metric-header">
-                <Code size={14} className="metric-icon emerald" aria-hidden="true" />
-                <span>Domain</span>
-              </div>
-              <strong>Algorithms & DS</strong>
-            </div>
-            <div className="comp-metric-card">
-              <div className="comp-metric-header">
-                <TerminalWindow size={14} className="metric-icon purple" aria-hidden="true" />
-                <span>Format</span>
-              </div>
-              <strong>ICPC · Speed & Precision</strong>
-            </div>
-          </div>
+              <h2 id="competition-title">HCMUS Coding Challenge <span>2026</span></h2>
 
-          <dl className="sr-only competition-facts">
-            <div>
-              <dt>Result</dt>
-              <dd>Champion</dd>
-            </div>
-            <div>
-              <dt>Setting</dt>
-              <dd>University competition</dd>
-            </div>
-            <div>
-              <dt>Focus</dt>
-              <dd>Algorithms · problem solving</dd>
-            </div>
-          </dl>
-        </motion.div>
+              <div className="competition-champion-card">
+                <div className="champion-badge-icon">
+                  <Trophy size={26} weight="fill" aria-hidden="true" />
+                </div>
+                <div className="champion-badge-body">
+                  <span className="champion-award-title">First Place Champion</span>
+                  <p className="champion-award-subtitle">Faculty of Information Technology · HCMUS, VNU-HCM</p>
+                </div>
+              </div>
 
-        <motion.figure variants={reduce ? undefined : photoReveal} className="competition-hero-figure">
-          <div className="competition-image-frame">
-            <img
-              className="competition-photo competition-photo-champion"
-              src="/assets/achievement/champion-enhanced.webp"
-              alt="Le Nam Khanh holding the HCMUS Coding Challenge 2026 champion board in front of HCMUS"
-              width="1024"
-              height="1024"
-              decoding="async"
-            />
-            <span className="photo-index" aria-hidden="true">EVIDENCE 01</span>
-          </div>
-          <figcaption>
-            <span>Award Presentation / HCMUS</span>
-            <p>First Place Champion award board in front of the Faculty of Information Technology, HCMUS.</p>
-          </figcaption>
-        </motion.figure>
+              <p className="competition-intro">
+                Competitive programming is where I practice transforming mathematical abstractions and combinatorial invariants into zero-overhead, edge-case-proof implementations under strict real-time constraints.
+              </p>
 
-        <div className="competition-supporting" aria-label="Competition photographs">
-          {supportingImages.map((image, index) => (
-            <motion.figure variants={reduce ? undefined : photoReveal} key={image.src}>
+              <div className="competition-metrics-grid" aria-label="Competition specifications">
+                <div className="comp-metric-card">
+                  <div className="comp-metric-header">
+                    <Trophy size={14} className="metric-icon gold" aria-hidden="true" />
+                    <span>Standing</span>
+                  </div>
+                  <strong>Rank 1 / Champion</strong>
+                </div>
+                <div className="comp-metric-card">
+                  <div className="comp-metric-header">
+                    <GraduationCap size={14} className="metric-icon blue" aria-hidden="true" />
+                    <span>Host</span>
+                  </div>
+                  <strong>FIT — HCMUS</strong>
+                </div>
+                <div className="comp-metric-card">
+                  <div className="comp-metric-header">
+                    <Code size={14} className="metric-icon emerald" aria-hidden="true" />
+                    <span>Domain</span>
+                  </div>
+                  <strong>Algorithms & DS</strong>
+                </div>
+                <div className="comp-metric-card">
+                  <div className="comp-metric-header">
+                    <TerminalWindow size={14} className="metric-icon purple" aria-hidden="true" />
+                    <span>Format</span>
+                  </div>
+                  <strong>ICPC · Speed & Precision</strong>
+                </div>
+              </div>
+
+              <dl className="sr-only competition-facts">
+                <div>
+                  <dt>Result</dt>
+                  <dd>Champion</dd>
+                </div>
+                <div>
+                  <dt>Setting</dt>
+                  <dd>University competition</dd>
+                </div>
+                <div>
+                  <dt>Focus</dt>
+                  <dd>Algorithms · problem solving</dd>
+                </div>
+              </dl>
+            </div>
+
+            <motion.figure variants={reduce ? undefined : photoReveal} className="competition-hero-figure">
               <div className="competition-image-frame">
                 <img
-                  className={image.className}
-                  src={image.src}
-                  alt={image.alt}
+                  className="competition-photo competition-photo-champion"
+                  src="/assets/achievement/champion-enhanced.webp"
+                  alt="Le Nam Khanh holding the HCMUS Coding Challenge 2026 champion board in front of HCMUS"
+                  width="1024"
+                  height="1024"
                   decoding="async"
                 />
-                <span className="photo-index" aria-hidden="true">EVIDENCE 0{index + 2}</span>
-                <span className="photo-overlay-tag">{index === 0 ? "Contest Terminal" : "Live Solving Stage"}</span>
+                <span className="photo-glass-pill" aria-hidden="true">
+                  <Trophy size={12} weight="fill" />
+                  <span>Champion Ceremony</span>
+                </span>
               </div>
-              <figcaption>{image.label}</figcaption>
+              <figcaption>
+                <span>Award Presentation / HCMUS</span>
+                <p>First Place Champion award board in front of the Faculty of Information Technology, HCMUS.</p>
+              </figcaption>
             </motion.figure>
-          ))}
-        </div>
+          </div>
 
-        {/* AI Challenge 2026 - Interactive Split Dossier & Gallery */}
+          <div className="competition-supporting" aria-label="Competition photographs">
+            {supportingImages.map((image, index) => (
+              <motion.figure variants={reduce ? undefined : photoReveal} key={image.src}>
+                <div className="competition-image-frame">
+                  <img
+                    className={image.className}
+                    src={image.src}
+                    alt={image.alt}
+                    decoding="async"
+                  />
+                  <span className="photo-glass-pill" aria-hidden="true">
+                    {index === 0 ? <TerminalWindow size={12} /> : <UsersThree size={12} />}
+                    <span>{image.tag}</span>
+                  </span>
+                </div>
+                <figcaption>{image.label}</figcaption>
+              </motion.figure>
+            ))}
+          </div>
+        </motion.article>
+
+        {/* Record 02: AI Challenge 2026 - Interactive Split Dossier & Gallery */}
         <motion.article variants={reduce ? undefined : photoReveal} className="ai-challenge-dossier-card">
           <div className="ai-dossier-col">
             <div className="ai-dossier-kicker-row">
@@ -236,7 +251,10 @@ export function CompetitionEvidence() {
                 alt={activePhoto.alt}
                 decoding="async"
               />
-              <span className="photo-index" aria-hidden="true">EVIDENCE 04</span>
+              <span className="photo-glass-pill" aria-hidden="true">
+                <Sparkle size={12} weight="fill" />
+                <span>Finals Evidence</span>
+              </span>
             </div>
             <div className="ai-gallery-bar">
               <figcaption className="ai-gallery-caption">
@@ -261,7 +279,7 @@ export function CompetitionEvidence() {
           </div>
         </motion.article>
 
-        {/* K-Tech College Ideathon 2026 - Hackathon Spotlight Card */}
+        {/* Record 03: K-Tech College Ideathon 2026 - Hackathon Spotlight Card */}
         <motion.article variants={reduce ? undefined : photoReveal} className="ktc-spotlight-card">
           <div className="ktc-spotlight-media">
             <div className="ktc-spotlight-frame">
@@ -271,7 +289,10 @@ export function CompetitionEvidence() {
                 alt="KTC Ideathon 2026 finals stage group photo with official backdrop and organizers"
                 decoding="async"
               />
-              <span className="photo-index" aria-hidden="true">EVIDENCE 05</span>
+              <span className="photo-glass-pill" aria-hidden="true">
+                <UsersThree size={12} weight="bold" />
+                <span>Finals Delegation</span>
+              </span>
             </div>
 
             <div className="ktc-media-bar">
@@ -334,7 +355,7 @@ export function CompetitionEvidence() {
           </div>
         </motion.article>
 
-        {/* GDGoC AI Challenge Record - Cyber Cover Card */}
+        {/* Record 04: GDGoC AI Challenge Record - Cyber Cover Card */}
         <motion.article variants={reduce ? undefined : photoReveal} className="competition-current-proof gdgoc-proof-card">
           <img
             className="ai-challenge-cover"
@@ -345,7 +366,10 @@ export function CompetitionEvidence() {
           <div className="ai-challenge-overlay">
             <div className="gdgoc-kicker-row">
               <span className="gdgoc-kicker">ADDITIONAL UNIVERSITY RECORD · 2026</span>
-              <span className="photo-index-inline">EVIDENCE 06</span>
+              <span className="photo-glass-pill-inline" aria-hidden="true">
+                <SealCheck size={12} weight="fill" />
+                <span>Top 20 Verified</span>
+              </span>
             </div>
             <span className="gdgoc-event-name">{currentCompetitionEvidence.event}</span>
             <h3 className="gdgoc-result">{currentCompetitionEvidence.result}</h3>
