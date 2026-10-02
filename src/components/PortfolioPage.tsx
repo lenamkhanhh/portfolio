@@ -22,7 +22,7 @@ export function PortfolioPage() {
           <b>LÊ NAM KHÁNH</b>
         </a>
         <nav aria-label="Primary navigation">
-          <a href="#work">Work</a>
+          <a href="#work">Projects</a>
           <a href="#trajectory">Trajectory</a>
           <a href="#contact">Contact</a>
         </nav>
@@ -58,7 +58,7 @@ export function PortfolioPage() {
           </motion.p>
           <motion.div variants={reduce ? undefined : heroItem} className="hero-actions">
             <a className="button button-primary" href="#work">
-              View project evidence
+              View featured projects
               <ArrowDown aria-hidden="true" />
             </a>
             <a className="text-link" href={contact.github.href} target="_blank" rel="noreferrer">
@@ -89,7 +89,7 @@ export function PortfolioPage() {
         <div>
           <h2 id="interests-title">Questions I am building toward.</h2>
           <p className="interests-intro">
-            These are directions of study—not claims of expertise or published research.
+            Active study and research directions in machine learning and multimodal systems.
           </p>
           <div className="interest-list">
             {interests.map((interest, index) => (

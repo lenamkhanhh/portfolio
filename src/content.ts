@@ -42,7 +42,7 @@ export const profile = {
   degree: "Information Technology · Student",
   thesis: "From algorithms to multimodal AI research.",
   intro:
-    "Competitive programming trained how I reason under constraints. I design and build end-to-end multimodal video retrieval pipelines, temporal event alignment algorithms, and verifiable AI systems.",
+    "Rooted in competitive programming and algorithmic rigor, I design and build multimodal video retrieval pipelines, temporal event alignment algorithms, and verifiable AI systems.",
 };
 
 export const contact = {
@@ -192,7 +192,7 @@ export const work: WorkItem[] = [
     type: "Multimodal retrieval system",
     focus: "Team Lead & Core Architect · SigLIP2 · GEMTRA DP · DRES",
     detail:
-      "Led team Reply 404 to architect and deploy an interactive multimodal video search platform indexing 1,487 videos and 533K keyframes with sub-7ms temporal DP alignment (GEMTRA) and evidence-linked VQA for AI Challenge HCMC 2026.",
+      "Interactive multimodal video search engine indexing 1,487 videos and 533K keyframes, featuring sub-7ms temporal DP alignment (GEMTRA) and evidence-linked VQA for AI Challenge HCMC 2026.",
     artifact: "Team Lead · 1,487 videos · 533K keyframes · GEMTRA DP engine (6.6ms) · SOICT 2026 Paper",
     artifactKind: "retrieval",
     href: "https://github.com/lenamkhanhh/HCMAIC-Retrieval",
@@ -204,7 +204,7 @@ export const work: WorkItem[] = [
     type: "Collaborative web platform",
     focus: "React 19 · TypeScript · Firebase · Firestore Rules",
     detail:
-      "A realtime collaborative travel planning workbench with authentication, multi-view timelines, priority assignment, group expense splitting, and realtime synchronization.",
+      "A collaborative travel planning workbench featuring interactive timelines, priority scheduling, group expense splitting, and live synchronization.",
     artifact: "Overview · Timeline planning · Expense split ledger · Member synchronization",
     artifactKind: "workbench",
     href: "https://mxhuit26.vercel.app/final-group/",
@@ -216,7 +216,7 @@ export const work: WorkItem[] = [
     type: "Desktop application & local gateway",
     focus: "Tauri · Rust · React · Local API Gateway",
     detail:
-      "A desktop application to manage and switch between multi-account AI coding tools (Claude Code, Codex) with an OpenAI-compatible local proxy gateway and real-time quota tracking.",
+      "A desktop application to switch between multi-account AI coding agents with an OpenAI-compatible local proxy gateway and live quota tracking.",
     artifact: "Tauri desktop app · Local OpenAI-compatible gateway · CLI wrappers · Quota tracking",
     artifactKind: "switcher",
     href: "https://github.com/lenamkhanhh/ai-switcher",
@@ -228,11 +228,11 @@ export const work: WorkItem[] = [
     type: "Learning system",
     focus: "Algorithms · Data Structures",
     detail:
-      "A structured 2026–2027 training plan with topic task banks, verified anchors, audit reports, and a reproducible workbook generator.",
+      "A structured competitive programming syllabus with topic task banks, verified problem anchors, progress audits, and automated workbook generation.",
     artifact: "Training plan → Topic task bank → Verified anchors → Audit reports → Workbook generator",
     artifactKind: "training",
     href: "https://github.com/lenamkhanhh/CP",
-    action: "Open training evidence",
+    action: "Open CP repository",
   },
 ];
 

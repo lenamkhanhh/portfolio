@@ -17,14 +17,14 @@ const supportingImages = [
   {
     src: "/assets/achievement/competition-focus-enhanced.webp",
     alt: "Le Nam Khanh concentrating at a computer during HCMUS Coding Challenge 2026",
-    label: "During the competition · Algorithm formulation & implementation",
+    label: "Live contest · Algorithm formulation & implementation",
     tag: "Contest Terminal",
     className: "competition-photo competition-photo-focus",
   },
   {
     src: "/assets/achievement/competition-stage-enhanced.webp",
     alt: "Le Nam Khanh solving a problem on stage at HCMUS Coding Challenge 2026",
-    label: "On-stage problem solving & leaderboard tracking",
+    label: "Live stage · Real-time solving & scoreboard tracking",
     tag: "Live Solving Stage",
     className: "competition-photo competition-photo-stage",
   },
@@ -84,7 +84,7 @@ export function CompetitionEvidence() {
                   <Trophy size={13} weight="fill" aria-hidden="true" />
                   <span>Grand Champion · Rank 1</span>
                 </span>
-                <p className="competition-kicker">FIT — HCMUS · UNIVERSITY RECORD 2026</p>
+                <p className="competition-kicker">FIT — HCMUS · CODING CHALLENGE 2026</p>
               </div>
               <h2 id="competition-title">HCMUS Coding Challenge <span>2026</span></h2>
 
@@ -99,7 +99,7 @@ export function CompetitionEvidence() {
               </div>
 
               <p className="competition-intro">
-                Competitive programming is where I practice transforming mathematical abstractions and combinatorial invariants into zero-overhead, edge-case-proof implementations under strict real-time constraints.
+                Competitive programming trains rigorous mathematical thinking, algorithmic intuition, and bug-free implementation under strict real-time constraints.
               </p>
 
               <div className="competition-metrics-grid" aria-label="Competition specifications">
@@ -196,7 +196,7 @@ export function CompetitionEvidence() {
         <motion.article variants={reduce ? undefined : photoReveal} className="ai-challenge-dossier-card">
           <div className="ai-dossier-col">
             <div className="ai-dossier-kicker-row">
-              <span className="ai-kicker-tag">TEAM LEAD · MAJOR CITY & UNIVERSITY RECORD</span>
+              <span className="ai-kicker-tag">TEAM LEAD · HCMC MUNICIPAL COMPETITION</span>
               <span className="ai-kicker-year">2026</span>
             </div>
 
@@ -320,7 +320,7 @@ export function CompetitionEvidence() {
               <div className="ktc-project-desc-box">
                 <span className="ktc-desc-label">PROJECT · HRCLAW RECRUITMENT AGENT</span>
                 <p>
-                  An intelligent recruiting copilot powered by Gemini 2.0 Flash to semantically parse candidate resumes, compute multi-criteria alignment scores against job descriptions, and generate contextual interview screening questions.
+                  An AI recruiting copilot powered by Gemini 2.0 Flash that parses resumes, scores candidate-job fit across multi-criteria embeddings, and generates structured interview questions.
                 </p>
               </div>
             </div>
@@ -365,7 +365,7 @@ export function CompetitionEvidence() {
           />
           <div className="ai-challenge-overlay">
             <div className="gdgoc-kicker-row">
-              <span className="gdgoc-kicker">ADDITIONAL UNIVERSITY RECORD · 2026</span>
+              <span className="gdgoc-kicker">UNIVERSITY AI COMPETITION · 2026</span>
               <span className="photo-glass-pill-inline" aria-hidden="true">
                 <SealCheck size={12} weight="fill" />
                 <span>Top 20 Verified</span>

@@ -6,13 +6,13 @@ export function ContactPanel() {
     <footer className="contact-panel" id="contact">
       <div className="section-label">
         <span>06</span>
-        <p>Start a conversation</p>
+        <p>Contact</p>
       </div>
       <div className="contact-copy">
         <p className="contact-kicker">Open to internships & AI research lab opportunities</p>
         <h2>Let's connect and build ambitious systems.</h2>
         <p>
-          Focused on multimodal video retrieval, temporal event reasoning, and high-performance AI engineering. Always open for research lab positions, software engineering internships, and technical discussions.
+          Focused on multimodal video retrieval, temporal event reasoning, and high-performance systems. Open to research lab opportunities, software engineering internships, and technical discussions.
         </p>
       </div>
       <div className="contact-actions">

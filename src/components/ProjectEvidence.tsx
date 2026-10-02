@@ -15,18 +15,18 @@ export function ProjectEvidence() {
       <div className="section-heading">
         <div className="section-label">
           <span>04</span>
-          <p>Selected evidence</p>
+          <p>Featured projects</p>
         </div>
         <div>
           <h2>Production systems & research software.</h2>
           <p>
-            Interactive web applications, sub-second multimodal retrieval engines, and developer tools built with verified performance and open-source code.
+            End-to-end multimodal retrieval engines, interactive web platforms, and open-source developer tooling.
           </p>
         </div>
       </div>
 
       <LayoutGroup>
-        <div className="project-tabs" role="tablist" aria-label="Selected work">
+        <div className="project-tabs" role="tablist" aria-label="Featured projects">
           {work.map((item, index) => (
             <motion.button
               layout
@@ -76,7 +76,7 @@ export function ProjectEvidence() {
               <p>{selected.detail}</p>
             </div>
             <div className="artifact-ledger">
-              <small>Current artifact</small>
+              <small>Technical highlights</small>
               <p>{selected.artifact}</p>
             </div>
             <a className="project-link" href={selected.href} target="_blank" rel="noreferrer">

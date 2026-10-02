@@ -210,7 +210,7 @@ export function PreUniversityRecord() {
             <h2 id="foundation-title">A record built before university.</h2>
           </div>
           <p>
-            A four-year evidence ledger connected by one continuous competition trajectory.
+            Four years of competitive programming and informatics olympiads.
           </p>
         </motion.div>
 
@@ -302,7 +302,7 @@ export function PreUniversityRecord() {
               <span className="foundation-stage-index">03—04</span>
               <div className="foundation-stage-copy">
                 <h3>Two national distinctions.</h3>
-                <p>Verified competition record · 2024</p>
+                <p>National finals & regional invitational · 2024</p>
               </div>
               <div className="foundation-proof-strip" aria-label="Additional verified distinctions">
                 <div className="foundation-distinction-card national-card">
@@ -319,7 +319,7 @@ export function PreUniversityRecord() {
                     </div>
                     <span className="distinction-status-pill national">
                       <SealCheck size={13} weight="fill" aria-hidden="true" />
-                      <span>Verified Stage</span>
+                      <span>National Finalist</span>
                     </span>
                   </div>
 
