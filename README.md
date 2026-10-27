@@ -11,8 +11,9 @@ Personal portfolio for **Le Nam Khanh**, a second-year student at the Faculty of
 
 ## Highlights
 
-- **Finalist · Bảng A**, AI Challenge HCMC 2026 (Reply 404; first and corresponding author of a manuscript submitted to SOICT 2026, under review)
-- Codeforces **Expert**, maximum rating **1796**
+- **Accepted Paper Author**, VBS at MMM 2027 ("Reply 404 at VBS 2027: Interactive Video Retrieval with Temporal Alignment and Native DRES Integration", sole author, Springer LNCS)
+- **Finalist · Bảng A**, AI Challenge HCMC 2026 (Reply 404; Team Lead & Core Architect)
+- Codeforces **Expert**, maximum rating **1854**
 - **Champion**, HCMUS Coding Challenge 2026
 - Current direction: competitive programming & algorithms → multimodal video retrieval & AI systems
 

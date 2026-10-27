@@ -25,13 +25,13 @@ AI Challenge TP.HCM · https://github.com/lenamkhanhh/HCMAIC-Retrieval
 - Contributed to a multimodal video retrieval system over 1,487 videos and 533,286 keyframes.
 - System combines visual, text and speech signals with temporal-event alignment, evidence inspection and DRES submission. Technologies include Python, SigLIP2, FAISS and GEMTRA.
 
-## Research Manuscript
+## Accepted Research Paper
 
-**Le Nam Khanh**, Truong Nhat Phat, Nguyen Dang Hien, Do Duy Dong.
+**Le Nam Khanh**.
 
-*Reply 404: An Interactive Video Retrieval System with GEMTRA Temporal Alignment for AI Challenge HCMC 2026.*
+*Reply 404 at VBS 2027: Interactive Video Retrieval with Temporal Alignment and Native DRES Integration.*
 
-Unpublished manuscript · 2026 · First and corresponding author.
+Accepted, VBS at MMM 2027 · Camera-ready in preparation.
 
 ## Selected Technical Projects
 
@@ -56,7 +56,7 @@ AI-assisted development. https://github.com/lenamkhanhh/ai-switcher
 - **2024:** 28th Traditional April 30 Olympiad — Bronze Medal in Informatics.
 - **Provincial Informatics Examination:** Second Prize, Grade 12, 2025; Third Prize, Grade 11, 2024; Third Prize, Grade 10.
 - **2024–25:** Provincial team participant, National Excellent Student Examination in Informatics.
-- **Codeforces:** Expert; peak rating: 1796. [Average2k7](https://codeforces.com/profile/Average2k7)
+- **Codeforces:** Expert; peak rating: 1854. [Average2k7](https://codeforces.com/profile/Average2k7)
 
 ## Technical Skills & Languages
 
