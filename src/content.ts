@@ -70,15 +70,15 @@ export const contact = {
 
 export const headlineEvidence: EvidenceItem[] = [
   {
-    label: "AI Challenge 2026",
-    value: "Finalist · Bảng A",
-    context: "Reply 404 · SOICT 2026 submission",
+    label: "VBS at MMM 2027",
+    value: "Accepted Paper",
+    context: "Reply 404 · Sole Author (LNCS)",
     tone: "academic",
     href: "https://github.com/lenamkhanhh/HCMAIC-Retrieval",
   },
   {
     label: "Codeforces",
-    value: "Expert · 1796",
+    value: "Expert · 1854",
     context: "Peak rating · Average2k7",
     tone: "competitive",
     href: contact.codeforces.href,
@@ -148,14 +148,50 @@ export const preUniversityAchievements: PreUniversityAchievement[] = [
   },
 ];
 
+export interface PublicationItem {
+  title: string;
+  author: string;
+  authorRole: string;
+  venue: string;
+  track: string;
+  series: string;
+  status: string;
+  competition: string;
+  paperId: string;
+  abstract: string;
+  highlights: string[];
+  href: string;
+}
+
+export const acceptedPublication: PublicationItem = {
+  title: "Reply 404 at VBS 2027: Interactive Video Retrieval with Temporal Alignment and Native DRES Integration",
+  author: "Le Nam Khanh",
+  authorRole: "Sole Author",
+  venue: "The 33rd International Conference on Multimedia Modeling (MMM 2027)",
+  track: "Video Browser Showdown (VBS 2027)",
+  series: "Springer Lecture Notes in Computer Science (LNCS)",
+  status: "Accepted · Camera-ready in preparation",
+  competition: "Live on-site evaluation in January 2027",
+  paperId: "Paper #874",
+  abstract:
+    "An interactive multimodal video retrieval system evaluated on 1,487 videos and 533,286 keyframes. Combines visual, text and speech signals with GEMTRA temporal-event alignment, interactive evidence inspection, and native DRES evaluation protocol integration.",
+  highlights: [
+    "Sole author peer-reviewed paper accepted to VBS @ MMM 2027 (Springer LNCS proceedings)",
+    "Indexed 1,487 videos & 533,286 keyframes using SigLIP2 (ViT-B/16) and FAISS vector indices",
+    "GEMTRA temporal-event alignment engine for multi-event temporal query sequences",
+    "Native DRES integration with sub-second live query latency for real-time competition rounds",
+  ],
+  href: "https://github.com/lenamkhanhh/HCMAIC-Retrieval",
+};
+
 export const aiChallengeEvidence = {
   result: "Finalist · Bảng A",
   event: "AI Challenge HCMC 2026",
   role: "Team Lead & Core Architect",
   team: "Reply 404 (Team Lead)",
   focus: "Multimodal Video Retrieval · Temporal Alignment",
-  paper: "SOICT 2026 · Submitted, under review",
-  paperRole: "First and corresponding author",
+  paper: "Accepted at VBS @ MMM 2027",
+  paperRole: "Sole author (Paper #874 · Springer LNCS)",
   href: "https://github.com/lenamkhanhh/HCMAIC-Retrieval",
   coverSrc: "/assets/achievement/ai-challenge-2026-team-backdrop.webp",
   certSrc: "/assets/achievement/ai-challenge-2026-certificate.webp",
@@ -194,7 +230,7 @@ export const work: WorkItem[] = [
     focus: "Multimodal retrieval · Temporal alignment · DRES",
     detail:
       "Interactive video retrieval for AI Challenge HCMC 2026, combining visual, text and speech signals with temporal-event alignment, evidence inspection and DRES submission.",
-    artifact: "1,487 videos · 533,286 keyframes · GEMTRA temporal alignment · SOICT 2026 submission",
+    artifact: "1,487 videos · 533,286 keyframes · GEMTRA temporal alignment · Accepted at VBS @ MMM 2027",
     artifactKind: "retrieval",
     href: "https://github.com/lenamkhanhh/HCMAIC-Retrieval",
     action: "Open retrieval repository",

@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  acceptedPublication,
   aiChallengeEvidence,
   contact,
   currentCompetitionEvidence,
@@ -24,8 +25,8 @@ describe("portfolio evidence contract", () => {
 
   it("surfaces only the three verified headline facts", () => {
     expect(headlineEvidence).toEqual([
-      expect.objectContaining({ label: "AI Challenge 2026", value: "Finalist · Bảng A" }),
-      expect.objectContaining({ label: "Codeforces", value: "Expert · 1796" }),
+      expect.objectContaining({ label: "VBS at MMM 2027", value: "Accepted Paper" }),
+      expect.objectContaining({ label: "Codeforces", value: "Expert · 1854" }),
       expect.objectContaining({
         label: "HCMUS Coding Challenge",
         value: "Champion · 2026",
@@ -79,8 +80,8 @@ describe("portfolio evidence contract", () => {
       role: "Team Lead & Core Architect",
       team: "Reply 404 (Team Lead)",
       focus: "Multimodal Video Retrieval · Temporal Alignment",
-      paper: "SOICT 2026 · Submitted, under review",
-      paperRole: "First and corresponding author",
+      paper: "Accepted at VBS @ MMM 2027",
+      paperRole: "Sole author (Paper #874 · Springer LNCS)",
       href: "https://github.com/lenamkhanhh/HCMAIC-Retrieval",
       coverSrc: "/assets/achievement/ai-challenge-2026-team-backdrop.webp",
       certSrc: "/assets/achievement/ai-challenge-2026-certificate.webp",
@@ -142,9 +143,17 @@ describe("portfolio evidence contract", () => {
     }
   });
 
-  it("keeps the SOICT submission pending and omits latency marketing", () => {
-    expect(aiChallengeEvidence.paper).toContain("Submitted, under review");
-    expect(aiChallengeEvidence.paperRole).toBe("First and corresponding author");
-    expect(JSON.stringify({ profile, headlineEvidence, aiChallengeEvidence, work })).not.toMatch(/LNCS|sub-7ms|6\.6ms/);
+  it("records the accepted VBS 2027 publication and contains no outdated SOICT submission", () => {
+    expect(aiChallengeEvidence.paper).toContain("Accepted at VBS @ MMM 2027");
+    expect(aiChallengeEvidence.paperRole).toContain("Sole author");
+    expect(JSON.stringify({ profile, headlineEvidence, aiChallengeEvidence, work })).not.toContain("SOICT");
+    expect(JSON.stringify({ profile, headlineEvidence, aiChallengeEvidence, work })).not.toMatch(/sub-7ms|6\.6ms/);
+  });
+
+  it("records accepted publication specifications accurately", () => {
+    expect(acceptedPublication.title).toContain("Reply 404 at VBS 2027");
+    expect(acceptedPublication.venue).toContain("MMM 2027");
+    expect(acceptedPublication.paperId).toBe("Paper #874");
+    expect(acceptedPublication.authorRole).toBe("Sole Author");
   });
 });

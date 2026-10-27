@@ -210,7 +210,7 @@ export function PreUniversityRecord() {
             <h2 id="foundation-title">A record built before university.</h2>
           </div>
           <p>
-            Four years of competitive programming and informatics olympiads.
+            Four years of competitive programming, Codeforces (Expert, peak 1854), and informatics olympiads.
           </p>
         </motion.div>
 

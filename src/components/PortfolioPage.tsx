@@ -10,6 +10,7 @@ import { EvidenceLedger } from "./EvidenceLedger";
 import { ProjectEvidence } from "./ProjectEvidence";
 import { PreUniversityRecord } from "./PreUniversityRecord";
 import { TrajectoryRail } from "./TrajectoryRail";
+import { PublicationSection } from "./PublicationSection";
 
 export function PortfolioPage() {
   const reduce = useReducedMotion();
@@ -27,6 +28,7 @@ export function PortfolioPage() {
           <b>LÊ NAM KHÁNH</b>
         </a>
         <nav aria-label="Primary navigation">
+          <a href="#publications">Publications</a>
           <a href="#work">Projects</a>
           <a href="#trajectory">Trajectory</a>
           <a href="#contact">Contact</a>
@@ -62,8 +64,8 @@ export function PortfolioPage() {
             {profile.intro}
           </motion.p>
           <motion.div variants={reduce ? undefined : heroItem} className="hero-actions">
-            <a className="button button-primary" href="#work">
-              View featured projects
+            <a className="button button-primary" href="#publications">
+              View accepted publication
               <ArrowDown aria-hidden="true" />
             </a>
             <a className="text-link" href={contact.github.href} target="_blank" rel="noreferrer">
@@ -102,6 +104,7 @@ export function PortfolioPage() {
         </motion.div>
       </section>
 
+      <PublicationSection />
       <TrajectoryRail />
       <PreUniversityRecord />
       <CompetitionEvidence />

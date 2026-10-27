@@ -179,9 +179,9 @@ export function CompetitionEvidence() {
               <div className="comp-metric-card">
                 <div className="comp-metric-header">
                   <TerminalWindow size={14} className="metric-icon purple" aria-hidden="true" />
-                  <span>Format</span>
+                  <span>Codeforces</span>
                 </div>
-                <strong>Speed & Precision</strong>
+                <strong>Expert · 1854 peak</strong>
               </div>
             </div>
 
@@ -252,7 +252,7 @@ export function CompetitionEvidence() {
               <div className="ai-dossier-paper">
                 <span className="paper-label">{aiChallengeEvidence.paper}</span>
                 <p>
-                  {aiChallengeEvidence.paperRole}. A submitted manuscript describing the Reply 404 retrieval system and GEMTRA temporal alignment.
+                  {aiChallengeEvidence.paperRole}. Accepted peer-reviewed publication at Video Browser Showdown, MMM 2027 (Springer LNCS, live competition January 2027).
                 </p>
               </div>
 
