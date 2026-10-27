@@ -44,7 +44,7 @@ describe("portfolio evidence contract", () => {
       "Multimodal Video Retrieval",
       "Temporal Event Reasoning",
       "Vision-Language Models",
-      "AI Agent Systems & Security",
+      "LLM & Agentic AI",
     ]);
   });
 
@@ -78,8 +78,9 @@ describe("portfolio evidence contract", () => {
       event: "AI Challenge HCMC 2026",
       role: "Team Lead & Core Architect",
       team: "Reply 404 (Team Lead)",
-      focus: "Multimodal Video Retrieval · GEMTRA DP Alignment",
-      paper: "SOICT 2026 Full Paper First Author",
+      focus: "Multimodal Video Retrieval · Temporal Alignment",
+      paper: "SOICT 2026 · Submitted, under review",
+      paperRole: "First and corresponding author",
       href: "https://github.com/lenamkhanhh/HCMAIC-Retrieval",
       coverSrc: "/assets/achievement/ai-challenge-2026-team-backdrop.webp",
       certSrc: "/assets/achievement/ai-challenge-2026-certificate.webp",
@@ -139,5 +140,11 @@ describe("portfolio evidence contract", () => {
     ]) {
       expect(serialized).not.toContain(forbidden);
     }
+  });
+
+  it("keeps the SOICT submission pending and omits latency marketing", () => {
+    expect(aiChallengeEvidence.paper).toContain("Submitted, under review");
+    expect(aiChallengeEvidence.paperRole).toBe("First and corresponding author");
+    expect(JSON.stringify({ profile, headlineEvidence, aiChallengeEvidence, work })).not.toMatch(/LNCS|sub-7ms|6\.6ms/);
   });
 });

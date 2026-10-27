@@ -39,10 +39,10 @@ export const profile = {
   name: "LÊ NAM KHÁNH",
   shortName: "Nam Khánh",
   school: "University of Science, VNU-HCM (HCMUS)",
-  degree: "Information Technology · Student",
+  degree: "Second-year Student",
   thesis: "From algorithms to multimodal AI research.",
   intro:
-    "IT student at HCMUS building multimodal video retrieval engines and verifiable AI systems, grounded in competitive programming.",
+    "HCMUS student building video retrieval systems, grounded in competitive programming and exploring LLM agents.",
 };
 
 export const contact = {
@@ -72,14 +72,14 @@ export const headlineEvidence: EvidenceItem[] = [
   {
     label: "AI Challenge 2026",
     value: "Finalist · Bảng A",
-    context: "Team Lead, Reply 404 · SOICT First Author",
+    context: "Reply 404 · SOICT 2026 submission",
     tone: "academic",
     href: "https://github.com/lenamkhanhh/HCMAIC-Retrieval",
   },
   {
     label: "Codeforces",
     value: "Expert · 1796",
-    context: "Verified profile",
+    context: "Peak rating · Average2k7",
     tone: "competitive",
     href: contact.codeforces.href,
   },
@@ -153,8 +153,9 @@ export const aiChallengeEvidence = {
   event: "AI Challenge HCMC 2026",
   role: "Team Lead & Core Architect",
   team: "Reply 404 (Team Lead)",
-  focus: "Multimodal Video Retrieval · GEMTRA DP Alignment",
-  paper: "SOICT 2026 Full Paper First Author",
+  focus: "Multimodal Video Retrieval · Temporal Alignment",
+  paper: "SOICT 2026 · Submitted, under review",
+  paperRole: "First and corresponding author",
   href: "https://github.com/lenamkhanhh/HCMAIC-Retrieval",
   coverSrc: "/assets/achievement/ai-challenge-2026-team-backdrop.webp",
   certSrc: "/assets/achievement/ai-challenge-2026-certificate.webp",
@@ -190,10 +191,10 @@ export const work: WorkItem[] = [
     title: "Reply 404 Video Retrieval",
     status: "Current work",
     type: "Multimodal retrieval system",
-    focus: "Team Lead & Core Architect · SigLIP2 · GEMTRA DP · DRES",
+    focus: "Multimodal retrieval · Temporal alignment · DRES",
     detail:
-      "Interactive multimodal video search engine indexing 1,487 videos and 533K keyframes, featuring sub-7ms temporal DP alignment (GEMTRA) and evidence-linked VQA for AI Challenge HCMC 2026.",
-    artifact: "Team Lead · 1,487 videos · 533K keyframes · GEMTRA DP engine (6.6ms) · SOICT 2026 Paper",
+      "Interactive video retrieval for AI Challenge HCMC 2026, combining visual, text and speech signals with temporal-event alignment, evidence inspection and DRES submission.",
+    artifact: "1,487 videos · 533,286 keyframes · GEMTRA temporal alignment · SOICT 2026 submission",
     artifactKind: "retrieval",
     href: "https://github.com/lenamkhanhh/HCMAIC-Retrieval",
     action: "Open retrieval repository",
@@ -240,5 +241,5 @@ export const interests = [
   "Multimodal Video Retrieval",
   "Temporal Event Reasoning",
   "Vision-Language Models",
-  "AI Agent Systems & Security",
+  "LLM & Agentic AI",
 ] as const;

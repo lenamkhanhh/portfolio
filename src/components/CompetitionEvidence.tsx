@@ -36,18 +36,24 @@ const aiGallery = [
     label: "Team Backdrop",
     caption: "Official Vòng Chung Kết backdrop at Nhà Văn Hóa Thanh Niên TP.HCM.",
     alt: "Team Reply 404 in front of official AI Challenge 2026 finals backdrop",
+    width: 1600,
+    height: 1200,
   },
   {
     src: aiChallengeEvidence.stageSrc,
     label: "On-Stage · Reply 404",
     caption: "Team Reply 404 on stage during the competition holding table card.",
     alt: "Team Reply 404 on stage holding table card",
+    width: 1600,
+    height: 1200,
   },
   {
     src: aiChallengeEvidence.certSrc,
     label: "Certificate & Badge",
     caption: "Official Certificate and Contestant Badge of Le Nam Khanh.",
     alt: "Official AI Challenge 2026 certificate and badge of Le Nam Khanh",
+    width: 1020,
+    height: 1020,
   },
 ] as const;
 
@@ -117,13 +123,13 @@ export function CompetitionEvidence() {
                   <Trophy size={24} weight="fill" aria-hidden="true" />
                 </div>
                 <div className="champion-badge-body">
-                  <span className="champion-award-title">First Place Champion · Rank 1</span>
+                  <span className="champion-award-title">Champion</span>
                   <p className="champion-award-subtitle">Faculty of Information Technology · HCMUS, VNU-HCM</p>
                 </div>
               </div>
 
               <p className="competition-intro">
-                Ranked 1st overall solving algorithmic problems under strict real-time and correctness constraints.
+                Competitive programming at HCMUS: algorithm design, implementation and correctness under time constraints.
               </p>
             </div>
 
@@ -244,20 +250,20 @@ export function CompetitionEvidence() {
               </p>
 
               <div className="ai-dossier-paper">
-                <span className="paper-label">SOICT 2026 FULL PAPER · FIRST AUTHOR</span>
+                <span className="paper-label">{aiChallengeEvidence.paper}</span>
                 <p>
-                  Interactive multimodal video search engine combining visual-text embeddings with GEMTRA dynamic programming temporal alignment.
+                  {aiChallengeEvidence.paperRole}. A submitted manuscript describing the Reply 404 retrieval system and GEMTRA temporal alignment.
                 </p>
               </div>
 
               <dl className="ai-dossier-metrics">
                 <div>
                   <dt>Scale</dt>
-                  <dd>1,487 Videos · 533K Keyframes</dd>
+                  <dd>1,487 videos · 533,286 keyframes</dd>
                 </div>
                 <div>
                   <dt>Alignment Engine</dt>
-                  <dd>GEMTRA DP (sub-7ms latency)</dd>
+                  <dd>GEMTRA temporal-event alignment</dd>
                 </div>
                 <div>
                   <dt>Encoders & API</dt>
@@ -279,7 +285,7 @@ export function CompetitionEvidence() {
 
             <div className="ai-gallery-col">
               <div
-                className="ai-gallery-frame"
+                className={galleryIdx === 2 ? "ai-gallery-frame ai-gallery-frame-certificate" : "ai-gallery-frame"}
                 id="ai-gallery-panel"
                 role="tabpanel"
                 aria-labelledby={`ai-gallery-tab-${galleryIdx}`}
@@ -290,8 +296,8 @@ export function CompetitionEvidence() {
                   className="ai-gallery-photo"
                   src={activePhoto.src}
                   alt={activePhoto.alt}
-                  width="1200"
-                  height="800"
+                  width={activePhoto.width}
+                  height={activePhoto.height}
                   loading="lazy"
                   decoding="async"
                 />

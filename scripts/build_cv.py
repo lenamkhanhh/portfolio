@@ -1,462 +1,187 @@
-from html import escape
 from pathlib import Path
-
-import fitz  # PyMuPDF
-from reportlab.lib import colors
-from reportlab.lib.colors import HexColor
-from reportlab.lib.enums import TA_LEFT
-from reportlab.lib.pagesizes import A4
-from reportlab.lib.styles import ParagraphStyle
-from reportlab.lib.units import mm
+from html import escape
+import argparse, json, os, shutil, subprocess
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.pdfgen import canvas
-from reportlab.platypus import Paragraph
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, KeepTogether, HRFlowable
+from reportlab.lib.styles import ParagraphStyle
+from reportlab.lib.colors import HexColor, black
+from reportlab.lib.pagesizes import A4
+from pypdf import PdfReader
+import pdfplumber
 
-ROOT = Path(__file__).resolve().parents[1]
-OUT_PDF = ROOT / "public" / "le-nam-khanh-cv.pdf"
-OUT_IMG = ROOT / "docs" / "cv-preview.png"
-OUT_PDF.parent.mkdir(parents=True, exist_ok=True)
-OUT_IMG.parent.mkdir(parents=True, exist_ok=True)
+ROOT=Path(__file__).resolve().parents[1]
+parser=argparse.ArgumentParser(description='Build the approved one-page research CV.')
+parser.add_argument('--output', type=Path, default=ROOT/'public/le-nam-khanh-cv.pdf')
+parser.add_argument('--markdown', type=Path, default=ROOT/'docs/personal-portfolio/le-nam-khanh-cv.md')
+parser.add_argument('--preview', type=Path, default=ROOT/'docs/cv-preview.png')
+args=parser.parse_args()
+OUT_PDF=args.output
+for target in (args.output,args.markdown,args.preview):
+    target.parent.mkdir(parents=True,exist_ok=True)
+TMP=ROOT/'tmp/pdfs/cv-polish'
+TMP.mkdir(parents=True,exist_ok=True)
+FONTS=Path(os.environ.get('WINDIR', r'C:\Windows'))/'Fonts'
+for name,file in [('Academic','times.ttf'),('Academic-Bold','timesbd.ttf'),('Academic-Italic','timesi.ttf'),('Academic-BoldItalic','timesbi.ttf')]:
+    pdfmetrics.registerFont(TTFont(name,str(FONTS/file)))
+pdfmetrics.registerFontFamily('Academic',normal='Academic',bold='Academic-Bold',italic='Academic-Italic',boldItalic='Academic-BoldItalic')
 
-PAGE_W, PAGE_H = A4
-MARGIN_X = 18 * mm
-CONTENT_W = PAGE_W - 2 * MARGIN_X
+styles={
+'name':ParagraphStyle('name',fontName='Academic-Bold',fontSize=25,leading=29,spaceAfter=4),
+'contact':ParagraphStyle('contact',fontName='Academic',fontSize=10.2,leading=13,textColor=HexColor('#313131')),
+'section':ParagraphStyle('section',fontName='Academic-Bold',fontSize=11.5,leading=15,spaceBefore=9,spaceAfter=2,keepWithNext=True),
+'body':ParagraphStyle('body',fontName='Academic',fontSize=10.7,leading=13.2),
+'entry':ParagraphStyle('entry',fontName='Academic',fontSize=10.7,leading=13.2),
+'date':ParagraphStyle('date',fontName='Academic',fontSize=10.4,leading=13.2,alignment=2),
+'bullet':ParagraphStyle('bullet',fontName='Academic',fontSize=10.7,leading=13.2,leftIndent=10,firstLineIndent=-8),
+}
+W=A4[0]-108
 
-DARK = HexColor("#0f172a")
-MUTED = HexColor("#475569")
-PURPLE = HexColor("#6366f1")
-CYAN = HexColor("#0891b2")
-LAVENDER = HexColor("#f5f3ff")
-MINT = HexColor("#f0fdf4")
-PALE = HexColor("#f8fafc")
-GRID = HexColor("#e2e8f0")
-WHITE = colors.white
+def para(s,style='body'):return Paragraph(s,styles[style])
+def section(title):return [para(title,'section'),HRFlowable(width='100%',thickness=.4,color=HexColor('#626262'),spaceAfter=5)]
+def dated(text,date):
+    t=Table([[para(text,'entry'),para(date,'date')]],colWidths=[W-75,75],hAlign='LEFT')
+    t.setStyle(TableStyle([('VALIGN',(0,0),(-1,-1),'TOP'),('LEFTPADDING',(0,0),(-1,-1),0),('RIGHTPADDING',(0,0),(-1,-1),0),('TOPPADDING',(0,0),(-1,-1),0),('BOTTOMPADDING',(0,0),(-1,-1),0)]))
+    return t
+def url(href,label):return f'<link href="{escape(href)}" color="#303030">{escape(label)}</link>'
 
+flow=[para('Lê Nam Khánh','name'),para('Faculty of Information Technology · University of Science, VNU-HCM','contact'),para(url('mailto:lenamkhanh07082007@gmail.com','lenamkhanh07082007@gmail.com')+' · '+url('https://lenamkhanh.netlify.app/','lenamkhanh.netlify.app')+' · '+url('https://github.com/lenamkhanhh','github.com/lenamkhanhh'),'contact'),Spacer(1,3)]
 
-def register_fonts() -> None:
-    fonts = {
-        "Segoe": r"C:\Windows\Fonts\segoeui.ttf",
-        "Segoe-Bold": r"C:\Windows\Fonts\segoeuib.ttf",
-        "Segoe-Italic": r"C:\Windows\Fonts\segoeuii.ttf",
-    }
-    for name, path in fonts.items():
-        pdfmetrics.registerFont(TTFont(name, path))
+flow+=section('Education')
+flow.append(dated('<b>University of Science, Vietnam National University Ho Chi Minh City</b>','Year 2'))
+flow.append(para('Undergraduate student, Faculty of Information Technology.'))
+flow.append(para('<b>Cumulative GPA: 8.37/10</b>'))
 
+flow+=section('Current Research Interests')
+flow.append(para('LLMs and Agentic AI.'))
 
-def style(name: str, size: float, leading: float, color=DARK, font="Segoe", **kwargs):
-    return ParagraphStyle(
-        name=name,
-        fontName=font,
-        fontSize=size,
-        leading=leading,
-        textColor=color,
-        alignment=TA_LEFT,
-        **kwargs,
-    )
+flow+=section('Research Experience')
+flow.append(dated('<b>Reply 404 — Interactive Video Retrieval</b>','2026'))
+flow.append(para('AI Challenge TP.HCM · '+url('https://github.com/lenamkhanhh/HCMAIC-Retrieval','github.com/lenamkhanhh/HCMAIC-Retrieval')))
+flow.append(para('• Contributed to a multimodal video retrieval system over 1,487 videos and 533,286 keyframes.','bullet'))
+flow.append(para('• System combines visual, text and speech signals with temporal-event alignment, evidence inspection and DRES submission. Technologies include Python, SigLIP2, FAISS and GEMTRA.','bullet'))
 
+flow+=section('Research Manuscript')
+flow.append(para('<b>Le Nam Khanh</b>, Truong Nhat Phat, Nguyen Dang Hien, Do Duy Dong.'))
+flow.append(para('<i>Reply 404: An Interactive Video Retrieval System with GEMTRA Temporal Alignment for AI Challenge HCMC 2026.</i>'))
+flow.append(para('Unpublished manuscript · 2026 · First and corresponding author.'))
 
-BODY = style("body", 8.2, 10.2)
-BODY_SMALL = style("body-small", 7.4, 9.1, color=MUTED)
-FOCUS_BODY = style("focus-body", 7.1, 8.2, color=MUTED)
-CARD_BODY = style("card-body", 7.05, 8.5)
-CARD_LINK = style("card-link", 6.8, 7.9, color=PURPLE)
-EDU = style("edu", 8.0, 9.4)
-SKILL = style("skill", 7.45, 8.9)
-SKILL_LABEL = style("skill-label", 7.6, 9.0, color=CYAN, font="Segoe-Bold")
-ACH_TITLE = style("achievement-title", 6.75, 7.4)
-ACH = style("achievement", 6.95, 7.7)
-FOOT = style("footer", 7.3, 8.9, color=MUTED)
+flow+=section('Selected Technical Projects')
+projects=[
+('<b>HrClaw</b> — AI-assisted recruitment and CV scoring.','Finalist team, K-Tech College Ideathon 2026. '+url('https://github.com/Mhoaii/HrClaw','github.com/Mhoaii/HrClaw')),
+('<b>TripFlow Workbench</b> — Collaborative trip planning and group expense application.','AI-assisted development. '+url('https://mxhuit26.vercel.app/final-group/','Live demo')),
+('<b>AI Account Switcher</b> — Desktop tooling with a local API gateway and CLI integration.','AI-assisted development. '+url('https://github.com/lenamkhanhh/ai-switcher','github.com/lenamkhanhh/ai-switcher')),
+]
+for a,b in projects:
+    flow.append(KeepTogether([para(a),para(b),Spacer(1,4)]))
 
+flow+=section('Honors & Competition Record')
+awards=[
+('<b>HCMUS Coding Challenge</b> — Champion.','2026'),
+('<b>AI Challenge TP.HCM</b> — Finalist, Table A.','2026'),
+('<b>GDGoC AI Challenge</b> — Top 20 Outstanding Team; team “Khô gà xé xợi”.','2026'),
+('<b>30th National Young Informatics Contest</b> — First Prize, Central Region, Table C2;<br/>Honourable Mention at the national finals.','2024'),
+('<b>28th Traditional April 30 Olympiad</b> — Bronze Medal in Informatics.','2024'),
+('<b>Provincial Informatics Examination</b> — Second Prize, Grade 12, 2025;<br/>Third Prize, Grade 11, 2024; Third Prize, Grade 10.',''),
+('Provincial team participant, National Excellent Student Examination in Informatics.','2024–25'),
+]
+for a,b in awards:flow.append(dated(a,b))
+flow.append(para('<b>Codeforces</b> — Expert; peak rating: 1796. '+url('https://codeforces.com/profile/Average2k7','Average2k7')))
 
-def para(c: canvas.Canvas, text: str, x: float, top: float, width: float, st: ParagraphStyle) -> float:
-    p = Paragraph(text, st)
-    _, h = p.wrap(width, PAGE_H)
-    p.drawOn(c, x, top - h)
-    return h
+flow+=section('Technical Skills & Languages')
+flow.append(para('<b>Programming:</b> C++, Python.'))
+flow.append(para('<b>English:</b> IELTS 6.5.'))
 
+doc=SimpleDocTemplate(str(OUT_PDF),pagesize=A4,leftMargin=54,rightMargin=54,topMargin=39,bottomMargin=36,title='Lê Nam Khánh — Research CV',author='Lê Nam Khánh')
+doc.build(flow)
+reader=PdfReader(OUT_PDF)
+text='\n'.join(p.extract_text() for p in reader.pages)
+assert '6.6' not in text and 'warm-cache' not in text
+assert 'Unpublished manuscript' in text and 'under review' not in text
+assert '8.37/10' in text and 'Student ID' not in text and '25120355' not in text
+assert len(reader.pages)==1, f'CV spills onto {len(reader.pages)} pages'
 
-def para_in_box(
-    c: canvas.Canvas,
-    text: str,
-    x: float,
-    top: float,
-    width: float,
-    bottom: float,
-    st: ParagraphStyle,
-    label: str,
-) -> float:
-    p = Paragraph(text, st)
-    _, h = p.wrap(width, PAGE_H)
-    if top - h < bottom - 0.2:
-        raise ValueError(
-            f"Layout overflow in {label}: top={top:.1f}, bottom={bottom:.1f}, height={h:.1f}, diff={top - h - bottom:.2f}"
-        )
-    p.drawOn(c, x, top - h)
-    return h
+md='''# Lê Nam Khánh
 
+Faculty of Information Technology · University of Science, VNU-HCM
 
-def plain(text: str) -> str:
-    return escape(text).replace("\n", "<br/>")
+lenamkhanh07082007@gmail.com · https://lenamkhanh.netlify.app/ · https://github.com/lenamkhanhh
 
+## Education
 
-def section_title(c: canvas.Canvas, title: str, x: float, y: float, color=PURPLE) -> None:
-    c.setFillColor(color)
-    c.setFont("Segoe-Bold", 10.2)
-    c.drawString(x, y, title.upper())
+**University of Science, Vietnam National University Ho Chi Minh City** — Year 2
 
+Undergraduate student, Faculty of Information Technology.
 
-def rounded_box(c: canvas.Canvas, x: float, y: float, w: float, h: float, fill, stroke=GRID, radius=3) -> None:
-    c.setFillColor(fill)
-    c.setStrokeColor(stroke)
-    c.setLineWidth(0.55)
-    c.roundRect(x, y, w, h, radius, fill=1, stroke=1)
+**Cumulative GPA: 8.37/10**
 
+## Current Research Interests
 
-def draw_header(c: canvas.Canvas) -> None:
-    top = PAGE_H - 16 * mm
-    c.setFillColor(DARK)
-    c.setFont("Segoe-Bold", 25)
-    c.drawString(MARGIN_X, top, "LÊ NAM KHÁNH")
+LLMs and Agentic AI.
 
-    c.setFillColor(PURPLE)
-    c.setFont("Segoe-Bold", 10.0)
-    c.drawString(MARGIN_X, top - 15, "AI / ML ENGINEERING  |  MULTIMODAL RETRIEVAL  |  RESEARCH")
+## Research Experience
 
-    c.setFillColor(MUTED)
-    c.setFont("Segoe", 9.0)
-    c.drawString(MARGIN_X, top - 28, "Information Technology student | University of Science, VNU-HCM (HCMUS)")
+**Reply 404 — Interactive Video Retrieval** — 2026
 
-    box_x = PAGE_W - MARGIN_X - 165
-    box_y = top - 43
-    rounded_box(c, box_x, box_y, 165, 47, PURPLE, PURPLE, radius=2)
-    c.setFillColor(WHITE)
-    c.setFont("Segoe", 8.0)
-    c.drawString(box_x + 10, box_y + 30, "lenamkhanh07082007@gmail.com")
-    c.setFont("Segoe", 7.2)
-    c.drawString(box_x + 10, box_y + 17, "github.com/lenamkhanhh")
-    c.drawString(box_x + 10, box_y + 6, "lenamkhanh.netlify.app")
+AI Challenge TP.HCM · https://github.com/lenamkhanhh/HCMAIC-Retrieval
 
-    c.setStrokeColor(GRID)
-    c.setLineWidth(0.65)
-    c.line(MARGIN_X, top - 55, PAGE_W - MARGIN_X, top - 55)
+- Contributed to a multimodal video retrieval system over 1,487 videos and 533,286 keyframes.
+- System combines visual, text and speech signals with temporal-event alignment, evidence inspection and DRES submission. Technologies include Python, SigLIP2, FAISS and GEMTRA.
 
+## Research Manuscript
 
-def draw_highlights(c: canvas.Canvas) -> None:
-    x, y, w, h = MARGIN_X, 666, CONTENT_W, 52
-    rounded_box(c, x, y, w, h, PALE, GRID, radius=1.5)
-    cells = [
-        ("AI CHALLENGE 2026", "Finalist | Bảng A (Top Teams)"),
-        ("HCMUS CODING", "Champion | 2026"),
-        ("CODEFORCES", "Expert | Max 1796"),
-        ("SOICT 2026", "Paper First Author"),
-    ]
-    cell_w = w / len(cells)
-    for i, (label, value) in enumerate(cells):
-        cx = x + i * cell_w
-        if i:
-            c.setStrokeColor(GRID)
-            c.line(cx, y, cx, y + h)
-        c.setFillColor(DARK)
-        c.setFont("Segoe", 6.9)
-        c.drawString(cx + 8, y + h - 13, label)
-        c.setFillColor(PURPLE if i in (0, 3) else CYAN)
-        c.setFont("Segoe-Bold", 7.9)
-        c.drawString(cx + 8, y + 10, value)
+**Le Nam Khanh**, Truong Nhat Phat, Nguyen Dang Hien, Do Duy Dong.
 
+*Reply 404: An Interactive Video Retrieval System with GEMTRA Temporal Alignment for AI Challenge HCMC 2026.*
 
-def draw_profile_and_education(c: canvas.Canvas) -> None:
-    profile_y = 642
-    section_title(c, "Profile", MARGIN_X, profile_y, PURPLE)
-    profile = (
-        "Information Technology student at HCMUS with a rigorous competitive programming background and practical expertise in "
-        "multimodal video retrieval and AI systems. First & corresponding author of SOICT 2026 research on structured temporal event "
-        "alignment (GEMTRA) and Finalist at the Ho Chi Minh City AI Challenge 2026. Skilled in architecting end-to-end retrieval pipelines, "
-        "fast algorithmic reasoning under constraints, and full-stack engineering."
-    )
-    para(c, plain(profile), MARGIN_X, profile_y - 9, CONTENT_W, BODY)
+Unpublished manuscript · 2026 · First and corresponding author.
 
-    edu_title_y = 579
-    section_title(c, "Education", MARGIN_X, edu_title_y, PURPLE)
-    y, h = 516, 49
-    left_w = CONTENT_W * 0.52
-    rounded_box(c, MARGIN_X, y, CONTENT_W, h, LAVENDER, GRID, radius=1.5)
-    c.setFillColor(DARK)
-    c.setFont("Segoe-Bold", 8.6)
-    c.drawString(MARGIN_X + 8, y + h - 13, "University of Science, VNU-HCM (HCMUS)")
-    para_in_box(
-        c,
-        plain("Information Technology | Student"),
-        MARGIN_X + 8,
-        y + h - 17,
-        left_w - 16,
-        y + 6,
-        EDU,
-        "education details",
-    )
-    c.setStrokeColor(GRID)
-    c.line(MARGIN_X + left_w, y, MARGIN_X + left_w, y + h)
-    c.setFillColor(DARK)
-    c.setFont("Segoe-Bold", 8.2)
-    c.drawString(MARGIN_X + left_w + 8, y + h - 13, "Current direction")
-    para_in_box(
-        c,
-        plain("Multimodal video retrieval, temporal event reasoning, and foundation model systems."),
-        MARGIN_X + left_w + 8,
-        y + h - 17,
-        CONTENT_W - left_w - 16,
-        y + 6,
-        EDU,
-        "education direction",
-    )
+## Selected Technical Projects
 
+**HrClaw** — AI-assisted recruitment and CV scoring.
 
-def draw_skills(c: canvas.Canvas, x: float, y_top: float, w: float) -> None:
-    section_title(c, "Technical skills", x, y_top, CYAN)
-    box_y, box_h = y_top - 128, 116
-    rounded_box(c, x, box_y, w, box_h, MINT, GRID, radius=1.5)
-    rows = [
-        ("Algorithms", "Data structures, graph algorithms, dynamic programming, constraint optimization"),
-        ("Languages", "Python, C++, TypeScript / JavaScript, Rust, SQL, Bash / PowerShell"),
-        ("AI / Retrieval", "Visual embeddings (SigLIP2), FAISS, RF-DETR, OCR/ASR, VQA, GEMTRA alignment"),
-        ("Engineering", "React 19 / Vite, Firebase / Firestore, Tauri, FastAPI, Git, testing, DRES API"),
-    ]
-    label_w = 66
-    row_h = box_h / len(rows)
-    for i, (label, value) in enumerate(rows):
-        ry = box_y + box_h - (i + 1) * row_h
-        if i:
-            c.setStrokeColor(GRID)
-            c.line(x, ry + row_h, x + w, ry + row_h)
-        para_in_box(
-            c,
-            plain(label),
-            x + 7,
-            ry + row_h - 8,
-            label_w - 12,
-            ry + 3,
-            SKILL_LABEL,
-            f"skill label {label}",
-        )
-        para_in_box(
-            c,
-            plain(value),
-            x + label_w + 5,
-            ry + row_h - 8,
-            w - label_w - 12,
-            ry + 3,
-            SKILL,
-            f"skill value {label}",
-        )
+Finalist team, K-Tech College Ideathon 2026. https://github.com/Mhoaii/HrClaw
 
+**TripFlow Workbench** — Collaborative trip planning and group expense application.
 
-def achievement_cell(
-    c: canvas.Canvas,
-    text_title: str,
-    text_value: str,
-    x: float,
-    top: float,
-    bottom: float,
-    w: float,
-) -> None:
-    title_h = para_in_box(
-        c,
-        plain(text_title),
-        x,
-        top - 5,
-        w,
-        bottom + 1,
-        ACH_TITLE,
-        f"achievement title {text_title}",
-    )
-    body_top = top - 6 - title_h
-    para_in_box(
-        c,
-        plain(text_value),
-        x,
-        body_top,
-        w,
-        bottom + 1,
-        ACH,
-        f"achievement value {text_title}",
-    )
+AI-assisted development. [Live demo](https://mxhuit26.vercel.app/final-group/)
 
+**AI Account Switcher** — Desktop tooling with a local API gateway and CLI integration.
 
-def draw_achievements(c: canvas.Canvas, x: float, y_top: float, w: float) -> None:
-    section_title(c, "Achievements", x, y_top, CYAN)
-    box_y, box_h = y_top - 180, 168
-    rounded_box(c, x, box_y, w, box_h, LAVENDER, GRID, radius=1.5)
-    col_w = w / 2
-    row_h = box_h / 4
-    cells = [
-        (("AI Challenge HCMC 2026", "Finalist (Bảng A) | Team Lead, Reply 404"), ("HCMUS Coding Challenge", "Champion (Rank 1) | 2026")),
-        (("GDGoC AI Challenge 2026", "Top 20 Outstanding Team | RL Approach"), ("KTC Ideathon 2026", "Finalist (HrClaw) | LIKELION & KOSME")),
-        (("SOICT 2026 Full Paper", "First & Corresponding Author (LNCS)"), ("Codeforces", "Expert | Max rating 1796")),
-        (("National Young Informatics", "1st Prize (Central C2) & Finalist (2024)"), ("Olympiad 30/4 & Prov. HSG", "Bronze Medal | Prov. 2nd & 3rd Prizes")),
-    ]
-    for r, row in enumerate(cells):
-        top = box_y + box_h - r * row_h
-        if r:
-            c.setStrokeColor(GRID)
-            c.line(x, top, x + w, top)
-        c.setStrokeColor(GRID)
-        c.line(x + col_w, top - row_h, x + col_w, top)
-        achievement_cell(c, row[0][0], row[0][1], x + 6, top, top - row_h, col_w - 12)
-        achievement_cell(c, row[1][0], row[1][1], x + col_w + 6, top, top - row_h, col_w - 12)
+AI-assisted development. https://github.com/lenamkhanhh/ai-switcher
 
+## Honors & Competition Record
 
-def project_card(c: canvas.Canvas, x: float, y: float, w: float, h: float, title: str, tech: str, desc: str, link_label: str) -> None:
-    rounded_box(c, x, y, w, h, PALE, GRID, radius=1.5)
-    c.setFillColor(DARK)
-    c.setFont("Segoe-Bold", 8.8)
-    c.drawString(x + 8, y + h - 12, title)
-    c.setFillColor(CYAN)
-    c.setFont("Segoe", 6.8)
-    c.drawString(x + 8, y + h - 22, tech)
-    para_in_box(c, plain(desc), x + 8, y + h - 26, w - 16, y + 13, CARD_BODY, f"project body {title}")
-    para_in_box(
-        c,
-        f'<font color="#6366f1">{escape(link_label)}</font>',
-        x + 8,
-        y + 10,
-        w - 16,
-        y + 2,
-        CARD_LINK,
-        f"project link {title}",
-    )
+- **2026:** HCMUS Coding Challenge — Champion.
+- **2026:** AI Challenge TP.HCM — Finalist, Table A.
+- **2026:** GDGoC AI Challenge — Top 20 Outstanding Team; team “Khô gà xé xợi”.
+- **2024:** 30th National Young Informatics Contest — First Prize, Central Region, Table C2; Honourable Mention at the national finals.
+- **2024:** 28th Traditional April 30 Olympiad — Bronze Medal in Informatics.
+- **Provincial Informatics Examination:** Second Prize, Grade 12, 2025; Third Prize, Grade 11, 2024; Third Prize, Grade 10.
+- **2024–25:** Provincial team participant, National Excellent Student Examination in Informatics.
+- **Codeforces:** Expert; peak rating: 1796. [Average2k7](https://codeforces.com/profile/Average2k7)
 
+## Technical Skills & Languages
 
-def draw_projects(c: canvas.Canvas, x: float, y_top: float, w: float) -> None:
-    section_title(c, "Selected projects", x, y_top, PURPLE)
-    card_h = 69
-    gap = 7
-    c1_y = y_top - 14 - card_h
-    c2_y = c1_y - gap - card_h
-    c3_y = c2_y - gap - card_h
+**Programming:** C++, Python.
 
-    project_card(
-        c,
-        x,
-        c1_y,
-        w,
-        card_h,
-        "Reply 404 — Video Retrieval System",
-        "Team Lead & Core Architect | Python, SigLIP2, GEMTRA DP, DRES API",
-        "Led 4-member team to design and build an interactive video search platform for 1,487 videos & 533K keyframes with sub-7ms temporal DP alignment (GEMTRA) and evidence-linked VQA under AIC countdowns.",
-        "SOICT 2026 Paper | GitHub / HCMAIC-Retrieval",
-    )
-    project_card(
-        c,
-        x,
-        c2_y,
-        w,
-        card_h,
-        "TripFlow Workbench",
-        "React 19 | TypeScript | Vite | Firebase Auth & Firestore Rules",
-        "Built a collaborative travel planning workbench featuring 4 realtime workflows: timeline scheduling with priority/assignees, expense splitting, and team member synchronization.",
-        "Live App / mxhuit26.vercel.app | GitHub",
-    )
-    project_card(
-        c,
-        x,
-        c3_y,
-        w,
-        card_h,
-        "AI Account Switcher",
-        "Tauri | Rust | React | Local API Gateway | CLI Wrappers",
-        "Desktop app managing multi-account rotation for AI coding assistants (Claude Code, Codex) with an OpenAI-compatible local proxy gateway and real-time quota tracking.",
-        "GitHub / ai-switcher",
-    )
+**English:** IELTS 6.5.
+'''
+(args.markdown).write_text(md,encoding='utf-8')
 
-    focus_h = 75
-    focus_y = c3_y - gap - focus_h
-    rounded_box(c, x, focus_y, w, focus_h, MINT, GRID, radius=1.5)
-    c.setFillColor(CYAN)
-    c.setFont("Segoe-Bold", 7.8)
-    c.drawString(x + 8, focus_y + focus_h - 13, "RESEARCH-ORIENTED INTERESTS")
-    para_in_box(
-        c,
-        plain("Multimodal Video Retrieval | Temporal Event Reasoning | Vision-Language Models | AI Agents"),
-        x + 8,
-        focus_y + focus_h - 18,
-        w - 16,
-        focus_y + 36,
-        FOCUS_BODY,
-        "research interests",
-    )
-    para_in_box(
-        c,
-        plain("Focusing on verifiable retrieval algorithms, multimodal alignment under resource constraints, and reproducible benchmarks."),
-        x + 8,
-        focus_y + 32,
-        w - 16,
-        focus_y + 4,
-        FOCUS_BODY,
-        "research interests note",
-    )
+checks=[]
+with pdfplumber.open(OUT_PDF) as pdf:
+    for p in pdf.pages:
+        words=p.extract_words()
+        outside=[w['text'] for w in words if w['x0']<35 or w['x1']>p.width-35 or w['top']<20 or w['bottom']>p.height-25]
+        assert not outside,outside
+        checks.append({'page':p.page_number,'words':len(words),'bounds':'PASS'})
+links=sum(1 for p in reader.pages for a in p.get('/Annots',[]) if a.get_object().get('/Subtype')=='/Link')
+assert links>=7
+check={'pages':len(reader.pages),'latency_removed':True,'manuscript_status':'UNPUBLISHED_NOT_UNDER_REVIEW','hyperlinks':links,'student_id_removed':True,'calculated_gpa_10':'8.37','gpa_provenance_stored_in_internal_calculation':True,'layout_checks':checks}
+(TMP/'checks.json').write_text(json.dumps(check,indent=2),encoding='utf-8')
+POP=shutil.which('pdftoppm') or str(Path.home()/'.cache/codex-runtimes/codex-primary-runtime/dependencies/native/poppler/Library/bin/pdftoppm.exe')
+subprocess.run([POP,'-scale-to','1900','-png',str(OUT_PDF),str(TMP/'research-cv')],check=True,stdout=subprocess.DEVNULL,stderr=subprocess.PIPE)
+print(json.dumps(check,ensure_ascii=False))
 
-
-def draw_footer(c: canvas.Canvas) -> None:
-    y_top = 142
-    section_title(c, "Relevant strengths", MARGIN_X, y_top, PURPLE)
-    box_y, box_h = 38, 84
-    rounded_box(c, MARGIN_X, box_y, CONTENT_W, box_h, PALE, GRID, radius=1.5)
-    left_w = CONTENT_W / 2
-    c.setStrokeColor(GRID)
-    c.line(MARGIN_X + left_w, box_y, MARGIN_X + left_w, box_y + box_h)
-    left = (
-        "- Fast at translating mathematical formulations & constraints into efficient implementations.<br/>"
-        "- Resilient operator with high debugging agility under live competition countdowns.<br/>"
-        "- Rigorous engineering mindset: separating empirical evidence from benchmark claims."
-    )
-    right = (
-        "- Full-stack capability: bridging ML/AI backend systems with fast, intuitive user experiences.<br/>"
-        "- Strong team collaborator across research ideation, system benchmarking, and code review.<br/>"
-        "- English: IELTS 6.5 | GitHub: lenamkhanhh | Codeforces: Average2k7"
-    )
-    para_in_box(c, left, MARGIN_X + 8, box_y + box_h - 8, left_w - 16, box_y + 5, FOOT, "left strengths")
-    para_in_box(c, right, MARGIN_X + left_w + 8, box_y + box_h - 8, left_w - 16, box_y + 5, FOOT, "right strengths")
-
-
-def add_links(c: canvas.Canvas) -> None:
-    box_x = PAGE_W - MARGIN_X - 165
-    box_y = PAGE_H - 16 * mm - 43
-    c.linkURL("https://github.com/lenamkhanhh", (box_x, box_y + 14, box_x + 165, box_y + 27), relative=0)
-    c.linkURL("https://lenamkhanh.netlify.app/", (box_x, box_y + 2, box_x + 165, box_y + 14), relative=0)
-
-
-def build() -> None:
-    register_fonts()
-    c = canvas.Canvas(str(OUT_PDF), pagesize=A4)
-    c.setTitle("Le Nam Khanh - Curriculum Vitae")
-    c.setAuthor("Le Nam Khanh")
-
-    draw_header(c)
-    draw_highlights(c)
-    draw_profile_and_education(c)
-
-    left_x = MARGIN_X
-    right_x = MARGIN_X + CONTENT_W * 0.51
-    left_w = CONTENT_W * 0.47
-    right_w = CONTENT_W * 0.49
-    main_top = 493
-    draw_skills(c, left_x, main_top, left_w)
-    draw_achievements(c, left_x, 352, left_w)
-    draw_projects(c, right_x, main_top, right_w)
-    draw_footer(c)
-    add_links(c)
-
-    c.showPage()
-    c.save()
-    print("PDF generated successfully:", OUT_PDF)
-
-    # Render preview image
-    doc = fitz.open(OUT_PDF)
-    page = doc[0]
-    pix = page.get_pixmap(dpi=150)
-    pix.save(str(OUT_IMG))
-    print("Preview image saved:", OUT_IMG)
-
-
-if __name__ == "__main__":
-    build()
+shutil.copy2(TMP/'research-cv-1.png',args.preview)

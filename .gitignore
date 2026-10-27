@@ -10,3 +10,6 @@ output/
 
 # Raw source photography
 Src image/
+
+tmp/
+tmp_*.txt

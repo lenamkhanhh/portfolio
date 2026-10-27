@@ -1,5 +1,5 @@
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { ProjectEvidence } from "./ProjectEvidence";
 
 describe("ProjectEvidence", () => {
@@ -15,5 +15,26 @@ describe("ProjectEvidence", () => {
     expect(markup).toContain('role="tabpanel"');
     expect(markup).toContain("Technical highlights");
     expect(markup).toContain("Reply 404 Video Retrieval");
+  });
+
+  it("keeps mobile controls linked to unique inline regions", () => {
+    vi.stubGlobal("window", {
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      matchMedia: () => ({ matches: true, addEventListener: vi.fn(), removeEventListener: vi.fn() }),
+    });
+    try {
+      const markup = renderToStaticMarkup(<ProjectEvidence activeIndex={2} />);
+      const controls = [...markup.matchAll(/aria-controls="([^"]+)"/g)].map((match) => match[1]);
+      expect(controls).toHaveLength(4);
+      expect(new Set(controls).size).toBe(4);
+      for (const id of controls) expect(markup).toContain(`id="${id}"`);
+      expect(markup.match(/aria-expanded="true"/g)).toHaveLength(1);
+      expect(markup.match(/hidden=""/g)).toHaveLength(3);
+      expect(markup).not.toContain('role="tablist"');
+      expect(markup).toContain('aria-labelledby="project-tab-2"');
+    } finally {
+      vi.unstubAllGlobals();
+    }
   });
 });

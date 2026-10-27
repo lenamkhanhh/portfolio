@@ -233,16 +233,16 @@ export function PreUniversityRecord() {
               </div>
               <ol className="foundation-years">
                 {[
-                  { achievement: grade10, grade: "Grade 10", year: "2022", medal: "bronze" as const, rank: "Provincial HSG" },
-                  { achievement: grade11, grade: "Grade 11", year: "2023", medal: "bronze" as const, rank: "Provincial HSG" },
-                  { achievement: grade12, grade: "Grade 12", year: "2024", medal: "silver" as const, rank: "Provincial HSG · Rank Up", progressed: true },
+                  { achievement: grade10, grade: "Grade 10", year: undefined, medal: "bronze" as const, rank: "Provincial HSG" },
+                  { achievement: grade11, grade: "Grade 11", year: "2024", medal: "bronze" as const, rank: "Provincial HSG" },
+                  { achievement: grade12, grade: "Grade 12", year: "2025", medal: "silver" as const, rank: "Provincial HSG · Rank Up", progressed: true },
                 ].map(({ achievement, grade, year, medal, rank, progressed }) => (
                   <li key={achievement.context} className={`foundation-year-item medal-${medal}`}>
                     <div className="foundation-year-top">
                       <span className="foundation-year-grade">{grade}</span>
                       <span className={`foundation-medal-pill ${medal}`}>
                         <Medal size={14} aria-hidden="true" />
-                        <small>{year}</small>
+                        {year && <small>{year}</small>}
                       </span>
                     </div>
                     <strong>{achievement.award}</strong>

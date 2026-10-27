@@ -1,4 +1,5 @@
 import { ArrowDown, DownloadSimple, GithubLogo } from "@phosphor-icons/react";
+import { useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { contact, interests, profile } from "../content";
 import { heroGroup, heroItem } from "../motion";
@@ -12,6 +13,7 @@ import { TrajectoryRail } from "./TrajectoryRail";
 
 export function PortfolioPage() {
   const reduce = useReducedMotion();
+  const [activeProject, setActiveProject] = useState(0);
 
   return (
     <main className="portfolio-shell">
@@ -35,9 +37,7 @@ export function PortfolioPage() {
         </a>
       </header>
 
-      <div id="main-content" tabIndex={-1} className="main-content-anchor" />
-
-      <section className="hero" id="top">
+      <section className="hero" id="top" aria-labelledby="main-content">
         <motion.span
           aria-hidden="true"
           className="hero-spectral-glint"
@@ -54,7 +54,7 @@ export function PortfolioPage() {
           <motion.p variants={reduce ? undefined : heroItem} className="overline">
             {profile.degree} · {profile.school}
           </motion.p>
-          <motion.h1 variants={reduce ? undefined : heroItem}>{profile.name}</motion.h1>
+          <motion.h1 id="main-content" tabIndex={-1} variants={reduce ? undefined : heroItem}>{profile.name}</motion.h1>
           <motion.p variants={reduce ? undefined : heroItem} className="hero-thesis">
             {profile.thesis}
           </motion.p>
@@ -85,15 +85,15 @@ export function PortfolioPage() {
               <span>Featured Engineering</span>
             </div>
             <div className="teaser-chips">
-              <a href="#work" className="teaser-chip">
+              <a href="#work" className="teaser-chip" onClick={() => setActiveProject(0)}>
                 <strong>Reply 404</strong>
                 <small>Multimodal Search</small>
               </a>
-              <a href="#work" className="teaser-chip">
+              <a href="#work" className="teaser-chip" onClick={() => setActiveProject(1)}>
                 <strong>TripFlow</strong>
                 <small>Collaborative Web</small>
               </a>
-              <a href="#work" className="teaser-chip">
+              <a href="#work" className="teaser-chip" onClick={() => setActiveProject(2)}>
                 <strong>AI Switcher</strong>
                 <small>Desktop Gateway</small>
               </a>
@@ -105,7 +105,7 @@ export function PortfolioPage() {
       <TrajectoryRail />
       <PreUniversityRecord />
       <CompetitionEvidence />
-      <ProjectEvidence />
+      <ProjectEvidence activeIndex={activeProject} onSelect={setActiveProject} />
 
       <section className="interests-section" aria-labelledby="interests-title">
         <div className="section-label">
@@ -115,7 +115,7 @@ export function PortfolioPage() {
         <div>
           <h2 id="interests-title">Questions I am building toward.</h2>
           <p className="interests-intro">
-            Active study and research directions in machine learning and multimodal systems.
+            Study directions I am exploring through projects, competitions and research.
           </p>
           <div className="interest-list">
             {interests.map((interest, index) => (

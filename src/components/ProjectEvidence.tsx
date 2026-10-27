@@ -1,24 +1,39 @@
-import { useEffect, useState, type KeyboardEvent } from "react";
+import { useEffect, useRef, useState, type Dispatch, type KeyboardEvent } from "react";
 import { ArrowRight, ArrowUpRight, GithubLogo, Globe } from "@phosphor-icons/react";
-import { AnimatePresence, LayoutGroup, motion, useReducedMotion } from "motion/react";
+import { LayoutGroup, motion, useReducedMotion } from "motion/react";
 import { work } from "../content";
 import type { WorkItem } from "../content";
 import { layoutTransition } from "../motion";
 import { ArtifactPreview } from "./ArtifactPreview";
 
 function useIsMobile() {
+  const focusAfterResize = useRef<string | null>(null);
   const [isMobile, setIsMobile] = useState(() => {
     if (typeof window === "undefined") return false;
-    return window.matchMedia("(max-width: 640px)").matches;
+    return window.matchMedia("(max-width: 760px)").matches;
   });
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const mql = window.matchMedia("(max-width: 640px)");
-    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    const mql = window.matchMedia("(max-width: 760px)");
+    const handler = (e: MediaQueryListEvent) => {
+      const focused = document.activeElement;
+      if (focused instanceof HTMLElement && focused.closest("#work")) {
+        focusAfterResize.current = focused.id.startsWith("project-tab-")
+          ? focused.id
+          : document.querySelector<HTMLElement>("#work .project-tab.active")?.id ?? null;
+      }
+      setIsMobile(e.matches);
+    };
     mql.addEventListener("change", handler);
     return () => mql.removeEventListener("change", handler);
   }, []);
+
+  useEffect(() => {
+    if (!focusAfterResize.current) return;
+    document.getElementById(focusAfterResize.current)?.focus({ preventScroll: true });
+    focusAfterResize.current = null;
+  }, [isMobile]);
 
   return isMobile;
 }
@@ -53,8 +68,10 @@ function ProjectDetailContent({
   );
 }
 
-export function ProjectEvidence() {
-  const [active, setActive] = useState(0);
+export function ProjectEvidence({ activeIndex, onSelect }: { activeIndex?: number; onSelect?: Dispatch<number> } = {}) {
+  const [localActive, setLocalActive] = useState(0);
+  const active = activeIndex ?? localActive;
+  const setActive = onSelect ?? setLocalActive;
   const reduce = useReducedMotion();
   const isMobile = useIsMobile();
   const selected = work[active];
@@ -79,22 +96,22 @@ export function ProjectEvidence() {
   };
 
   return (
-    <section className="work-section" id="work">
+    <section className="work-section" id="work" tabIndex={-1}>
       <div className="section-heading">
         <div className="section-label">
           <span>04</span>
           <p>Featured projects</p>
         </div>
         <div>
-          <h2>Production systems & research software.</h2>
+          <h2>Selected systems & research projects.</h2>
           <p>
-            End-to-end multimodal retrieval engines, interactive web platforms, and open-source developer tooling.
+            Video retrieval, collaborative web applications and developer tools. Explore the systems and their source code.
           </p>
         </div>
       </div>
 
       <LayoutGroup>
-        <div className="project-tabs" role="tablist" aria-label="Featured projects">
+        <div className="project-tabs" role={isMobile ? undefined : "tablist"} aria-label="Featured projects">
           {work.map((item, index) => {
             const isActive = active === index;
             const tabButton = (
@@ -104,11 +121,12 @@ export function ProjectEvidence() {
                 className={isActive ? "project-tab active" : "project-tab"}
                 onClick={() => setActive(index)}
                 onKeyDown={(e) => handleKeyDown(e, index)}
-                role="tab"
+                role={isMobile ? undefined : "tab"}
                 id={`project-tab-${index}`}
-                aria-selected={isActive}
-                aria-controls="selected-project-detail"
-                tabIndex={isActive ? 0 : -1}
+                aria-selected={isMobile ? undefined : isActive}
+                aria-expanded={isMobile ? isActive : undefined}
+                aria-controls={isMobile ? `project-detail-${index}` : "selected-project-detail"}
+                tabIndex={isMobile || isActive ? 0 : -1}
                 key={item.title}
               >
                 <span className="project-tab-topline">
@@ -130,25 +148,19 @@ export function ProjectEvidence() {
               return (
                 <div className="project-mobile-item-wrap" key={item.title}>
                   {tabButton}
-                  <AnimatePresence mode="wait">
-                    {isActive && (
-                      <motion.article
-                        id="selected-project-detail"
-                        className="project-detail project-detail-mobile"
-                        role="tabpanel"
-                        aria-labelledby={`project-tab-${active}`}
-                        aria-live="polite"
-                        tabIndex={0}
-                        key={`mobile-detail-${item.title}`}
-                        initial={reduce ? false : { opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={reduce ? undefined : { opacity: 0, height: 0 }}
-                        transition={reduce ? { duration: 0 } : { duration: 0.24, ease: "easeOut" }}
-                      >
-                        <ProjectDetailContent item={selected} index={active} />
-                      </motion.article>
-                    )}
-                  </AnimatePresence>
+                  <motion.article
+                    id={`project-detail-${index}`}
+                    className="project-detail project-detail-mobile"
+                    role="region"
+                    aria-labelledby={`project-tab-${index}`}
+                    hidden={!isActive}
+                    tabIndex={0}
+                    initial={false}
+                    animate={{ opacity: isActive ? 1 : 0 }}
+                    transition={reduce ? { duration: 0 } : { duration: 0.24, ease: "easeOut" }}
+                  >
+                    {isActive && <ProjectDetailContent item={item} index={index} />}
+                  </motion.article>
                 </div>
               );
             }
@@ -158,24 +170,20 @@ export function ProjectEvidence() {
         </div>
 
         {!isMobile && (
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.article
-              layout
-              id="selected-project-detail"
-              className="project-detail project-detail-desktop"
-              role="tabpanel"
-              aria-labelledby={`project-tab-${active}`}
-              aria-live="polite"
-              tabIndex={0}
-              key={selected.title}
-              initial={reduce ? false : { opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={reduce ? undefined : { opacity: 0, y: -6 }}
-              transition={reduce ? { duration: 0 } : layoutTransition}
-            >
-              <ProjectDetailContent item={selected} index={active} />
-            </motion.article>
-          </AnimatePresence>
+          <motion.article
+            layout
+            id="selected-project-detail"
+            className="project-detail project-detail-desktop"
+            role="tabpanel"
+            aria-labelledby={`project-tab-${active}`}
+            aria-live="polite"
+            tabIndex={0}
+            initial={false}
+            animate={{ opacity: 1, y: 0 }}
+            transition={reduce ? { duration: 0 } : layoutTransition}
+          >
+            <ProjectDetailContent item={selected} index={active} />
+          </motion.article>
         )}
       </LayoutGroup>
     </section>

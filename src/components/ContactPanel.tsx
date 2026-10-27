@@ -10,9 +10,9 @@ export function ContactPanel() {
       </div>
       <div className="contact-copy">
         <p className="contact-kicker">Opportunities & Collaboration</p>
-        <h2>Let's connect and build ambitious systems.</h2>
+        <h2>Let's talk research and engineering.</h2>
         <p>
-          Focused on multimodal video retrieval, temporal event reasoning, and verifiable AI systems. Open to research lab opportunities, software engineering internships, and technical discussions.
+          Open to research lab opportunities, engineering projects and technical discussions. Currently exploring multimodal retrieval, temporal reasoning and LLM agents.
         </p>
       </div>
       <div className="contact-actions">

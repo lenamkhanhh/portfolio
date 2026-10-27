@@ -1,17 +1,17 @@
 # Le Nam Khanh — Portfolio
 
-[![Live site](https://img.shields.io/badge/Live%20site-Netlify-00C7B7?logo=netlify&logoColor=white)](https://lenamkhanh-portfolio.netlify.app)
+[![Live site](https://img.shields.io/badge/Live%20site-Netlify-00C7B7?logo=netlify&logoColor=white)](https://lenamkhanh.netlify.app)
 [![GitHub profile](https://img.shields.io/badge/GitHub-lenamkhanhh-181717?logo=github&logoColor=white)](https://github.com/lenamkhanhh)
 
-Personal portfolio for **Le Nam Khanh**, a first-year Information Technology student at the University of Science, VNU-HCM (HCMUS). It presents verified academic and competitive-programming evidence alongside an evolving trajectory from algorithms toward AI foundations and research interests.
+Personal portfolio for **Le Nam Khanh**, a second-year student at the Faculty of Information Technology, University of Science, VNU-HCM (HCMUS). It presents academic and competitive-programming evidence alongside an evolving trajectory from algorithms toward multimodal retrieval and LLM agents.
 
 ## Live website
 
-**[lenamkhanh-portfolio.netlify.app](https://lenamkhanh-portfolio.netlify.app)**
+**[lenamkhanh.netlify.app](https://lenamkhanh.netlify.app)**
 
 ## Highlights
 
-- **Finalist · Bảng A**, AI Challenge HCMC 2026 (Reply 404, SOICT 2026 First Author)
+- **Finalist · Bảng A**, AI Challenge HCMC 2026 (Reply 404; first and corresponding author of a manuscript submitted to SOICT 2026, under review)
 - Codeforces **Expert**, maximum rating **1796**
 - **Champion**, HCMUS Coding Challenge 2026
 - Current direction: competitive programming & algorithms → multimodal video retrieval & AI systems
@@ -21,7 +21,7 @@ The portfolio intentionally avoids unsupported claims about employment, publicat
 ## Features
 
 - Evidence-led, responsive one-page portfolio
-- Accessible navigation, project tabs, and reduced-motion behavior
+- Accessible navigation, desktop project tabs, mobile inline project regions, and reduced-motion behavior
 - Fixed Canvas constellation field with a static technical-blueprint overlay
 - Deterministic visual field, capped DPR/FPS, and lifecycle-aware animation cleanup
 - English-only visitor-facing content with links to CV, GitHub, Codeforces, and selected work

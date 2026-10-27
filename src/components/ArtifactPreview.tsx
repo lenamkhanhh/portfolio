@@ -74,7 +74,7 @@ function RetrievalPreview() {
       <circle cx="36" cy="31" r="3" fill="currentColor" opacity=".8" />
       <line x1="45" y1="31" x2="110" y2="31" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
       <rect x="220" y="24" width="72" height="14" rx="3" fill="currentColor" opacity=".18" />
-      <text x="232" y="34" fill="currentColor" fontSize="7.5" fontFamily="var(--mono)" letterSpacing="0.05em">GEMTRA DP</text>
+      <text x="232" y="34" fill="currentColor" fontSize="7.5" fontFamily="var(--mono)" letterSpacing="0.05em">GEMTRA</text>
 
       {/* Video keyframe timeline track */}
       <line x1="28" y1="76" x2="292" y2="76" stroke="currentColor" strokeWidth="1.5" opacity=".4" />
@@ -97,7 +97,7 @@ function RetrievalPreview() {
         viewport={{ once: true }}
         transition={{ duration: 0.7 }}
       />
-      <text x="146" y="126" fill="currentColor" fontSize="8" fontFamily="var(--mono)" letterSpacing="0.06em">[tL, tR] 6.6ms</text>
+      <text x="146" y="126" fill="currentColor" fontSize="8" fontFamily="var(--mono)" letterSpacing="0.06em">ALIGNED EVENTS</text>
 
       {/* Temporal relations */}
       <circle cx="68" cy="148" r="4" fill="none" stroke="currentColor" strokeWidth="1.2" opacity=".6" />
